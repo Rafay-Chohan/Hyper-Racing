@@ -5,16 +5,20 @@ using UnityEngine;
 public class CheckpointManager : MonoBehaviour
 {
     private GameObject[] checkpoints;
-    private int currentCheckpoint = 1;
+    public int totalCheckpoints;
+    public int currentCheckpoint = 1;
+    public GameManager gameManager;
 
     void Start()
     {
-        checkpoints = new GameObject[transform.childCount];
+        totalCheckpoints = transform.childCount;
+        checkpoints = new GameObject[totalCheckpoints];
         for (int i = 0; i < transform.childCount; i++)
         {
             checkpoints[i] = transform.GetChild(i).gameObject;
             checkpoints[i].SetActive(i == 0);
         }
+        gameManager.UpdateCheckpointUI(currentCheckpoint, totalCheckpoints);
     }
 
     public void CheckpointReached(int checkpointNumber)
@@ -26,6 +30,7 @@ public class CheckpointManager : MonoBehaviour
             checkpoints[currentCheckpoint].SetActive(true);
             currentCheckpoint++;
             Debug.Log($"Checkpoint {currentCheckpoint - 1} passed!");
+            gameManager.UpdateCheckpointUI(currentCheckpoint, totalCheckpoints);
         }
         else
         {
