@@ -1,0 +1,49 @@
+1.Player Car Mechanics
+
+	Steering (left/right virtual buttons).  Done Rafay 4/5/2025
+
+	Acceleration/deceleration (gas/brake).	Done Rafay 4/5/2025
+
+	Bug where car starts tilting
+
+2.Power-Up System
+
+	Implement 2 power-ups: 
+		NOS Boost (speed burst)	Done Rafay 5/5/2025
+		Projectile(missile type) Partially Done Rafay 5/5/2025
+
+	Pickup spawning logic on tracks. Done Rafay 4/5/2025
+
+	Add icons for power-ups
+
+3.Drivatar AI
+
+	Simple pathfinding (waypoints on track). Done Isbah 4/5/2025
+
+	Competitive behavior (variable speed/difficulty). Partially Done Isbah 4/5/2025
+
+4.Race Mechanics
+
+	Lap counter, finish line detection. Done Isbah 4/5/2025
+
+	Position Detection (UI placeholder).
+
+5.Track Design
+
+	1–2 simple tracks with boundaries (MODULAR DESIGN). Done Isbah 4/5/2025
+
+		1) Lines on roads
+		2) Road boundary
+		3) Prominent Finish line
+
+6.UI/UX
+
+	Start screen (Play, Exit, Options). Partially Done Zophiel 4/5/2025
+
+	In-game HUD (speedometer, power-up slots). Partially Done Zophiel 4/5/2025
+
+	Results screen (win/lose, rewards placeholder). Partially Done Zophiel 4/5/2025
+
+
+Order of implementation
+	1. Movement + Controls → 2. Track System + Environment → 3. Power-Ups → 4. Drivatars → 5. Game Loop + Progression → 6. UI
