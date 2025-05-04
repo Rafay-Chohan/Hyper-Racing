@@ -22,16 +22,19 @@ public class CarMechanics : MonoBehaviour
         // Forward/backward movement
         float moveInput = Input.GetAxis("Vertical");
         rb.AddForce(transform.forward * moveInput * speed, ForceMode.Acceleration);
-
-        // Steering (turn only when moving)
-        if (Mathf.Abs(moveInput) > 0.1f) {
+        float currentSpeed = new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude;
+        // Steering (turn only if car is moving)
+        if (currentSpeed > 0.5f) {  // Threshold to prevent tiny movements
             float turnInput = Input.GetAxis("Horizontal");
             transform.Rotate(Vector3.up * turnInput * turnSpeed * Time.deltaTime);
         }
     }
     void OnScreenButtonMove(){
         rb.AddForce(transform.forward * gasInput * speed, ForceMode.Acceleration);
-        if (Mathf.Abs(gasInput) > 0.1f) {
+        float currentSpeed = new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude;
+
+        // Steering (turn only if car is moving)
+        if (currentSpeed > 0.5f) {  // Threshold to prevent tiny movements
             transform.Rotate(Vector3.up * turnInput * turnSpeed * Time.deltaTime);
         }
     }
