@@ -1931,13 +1931,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2949711372218448560, guid: bcdcba9a8553ef24fbce6b37c7ec6f49, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.96904117
+      objectReference: {fileID: 0}
+    - target: {fileID: 2949711372218448560, guid: bcdcba9a8553ef24fbce6b37c7ec6f49, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.031477593
+      objectReference: {fileID: 0}
+    - target: {fileID: 2949711372218448560, guid: bcdcba9a8553ef24fbce6b37c7ec6f49, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.2447553
+      objectReference: {fileID: 0}
+    - target: {fileID: 2949711372218448560, guid: bcdcba9a8553ef24fbce6b37c7ec6f49, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.007950445
+      objectReference: {fileID: 0}
+    - target: {fileID: 2949711372218448560, guid: bcdcba9a8553ef24fbce6b37c7ec6f49, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5230141825816606784, guid: bcdcba9a8553ef24fbce6b37c7ec6f49, type: 3}
       propertyPath: m_Name
       value: Track1
       objectReference: {fileID: 0}
     - target: {fileID: 8329960222259749288, guid: bcdcba9a8553ef24fbce6b37c7ec6f49, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -205
+      value: -210.9
       objectReference: {fileID: 0}
     - target: {fileID: 8329960222259749288, guid: bcdcba9a8553ef24fbce6b37c7ec6f49, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1945,7 +1965,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8329960222259749288, guid: bcdcba9a8553ef24fbce6b37c7ec6f49, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -502
+      value: -442.6
       objectReference: {fileID: 0}
     - target: {fileID: 8329960222259749288, guid: bcdcba9a8553ef24fbce6b37c7ec6f49, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2036,9 +2056,17 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 64
       objectReference: {fileID: 0}
+    - target: {fileID: 7435772921751561592, guid: 962069d79811c744f9ed51ec5304d4c4, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 7534722040835047303, guid: 962069d79811c744f9ed51ec5304d4c4, type: 3}
       propertyPath: m_Name
       value: Racing Car
+      objectReference: {fileID: 0}
+    - target: {fileID: 7534722040835047303, guid: 962069d79811c744f9ed51ec5304d4c4, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
