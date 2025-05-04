@@ -32,4 +32,14 @@ public class GameManager : MonoBehaviour
     {
         checkpointText.text = $"{currentCheckpoint}/{totalCheckpoints}";
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+        
+        // To make sure it also works in the Unity Editor
+        #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+        #endif
+    }
 }
