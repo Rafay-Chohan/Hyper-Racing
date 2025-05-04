@@ -11,6 +11,14 @@ public class CarMechanics : MonoBehaviour
     private float currentSpeed = 0f; 
     public GameManager gameManager;
 
+    private string powerUpName;
+    bool isPowerUpAvailable = false;
+    private float nosMultiplier = 2f; // nosMultiplier for speed boost
+    private float nosDuration = 3f; // Duration of NOS effect
+
+    [Header("Missile Settings")]
+    public Transform missileSpawnPoint; // Assign in Inspector (empty GameObject at rear of car)
+    public GameObject missilePrefab;
     void Start() {
         rb = GetComponent<Rigidbody>();
     }
@@ -53,5 +61,51 @@ public class CarMechanics : MonoBehaviour
 
     public void SetTurnInput(float input) {
         turnInput = input;
+    }
+    public void ActivatePowerUp(string powerUpName) {
+        this.powerUpName = powerUpName;
+        isPowerUpAvailable = true;
+        Debug.Log("Power-up activated: " + powerUpName);
+        
+    }
+    public void UsePowerUp(){
+        if (isPowerUpAvailable) {
+            switch (powerUpName) {
+                case "Nitro":
+                    speed *= nosMultiplier;
+                    Invoke(nameof(ResetNOS), nosDuration); // Duration of NOS effect
+                    break;
+                case "Missile":
+                    FireMissile();
+                    break;
+                default:
+                    Debug.Log("Unknown power-up: " + powerUpName);
+                    break;
+            }
+            isPowerUpAvailable = false; // Reset power-up availability
+        } else {
+            Debug.Log("No power-up available to use.");
+        }
+    }
+     private void FireMissile() {
+        if (missilePrefab == null || missileSpawnPoint == null) return;
+
+        GameObject missile = Instantiate(
+            missilePrefab,
+            missileSpawnPoint.position,
+            missileSpawnPoint.rotation
+        );
+
+        // Add force backward (since missiles fire at opponents behind)
+        Rigidbody missileRb = missile.GetComponent<Rigidbody>();
+        if (missileRb != null) {
+            missileRb.AddForce(missileSpawnPoint.forward * 50f, ForceMode.Impulse);
+        }
+
+        Destroy(missile, 5f); // Auto-destroy after 5 seconds
+    }
+    private void ResetNOS() {
+        speed /= nosMultiplier;
+        Debug.Log("NOS effect ended.");
     }
 }

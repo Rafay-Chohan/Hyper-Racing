@@ -12,6 +12,12 @@ public class AIScript : MonoBehaviour
     private int currentWaypoint = 0;
     private Rigidbody rb;
     private float currentSpeed;
+    private float nosMultiplier = 2f; // NOS multiplier for speed boost
+    private float nosDuration = 3f; // Duration of NOS effect
+
+    [Header("Missile Settings")]
+    public Transform missileSpawnPoint; // Assign in Inspector (empty GameObject at rear of car)
+    public GameObject missilePrefab;
 
     void Start()
     {
@@ -78,5 +84,42 @@ public class AIScript : MonoBehaviour
                 }
             }
         }
+    }
+    public void ActivatePowerUp(string powerUpName)
+    {
+        Debug.Log("AI activated power-up: " + powerUpName);
+        switch (powerUpName) {
+                case "Nitro":
+                    speed *= nosMultiplier;
+                    Invoke(nameof(ResetNOS), nosDuration); // Duration of NOS effect
+                    break;
+                case "Missile":
+                    FireMissile();
+                    break;
+                default:
+                    Debug.Log("Unknown power-up: " + powerUpName);
+                    break;
+            }
+    }
+    private void FireMissile() {
+        if (missilePrefab == null || missileSpawnPoint == null) return;
+        Debug.Log("AI fired a missile!");   
+        GameObject missile = Instantiate(
+            missilePrefab,
+            missileSpawnPoint.position,
+            missileSpawnPoint.rotation
+        );
+
+        // Add force backward (since missiles fire at opponents behind)
+        Rigidbody missileRb = missile.GetComponent<Rigidbody>();
+        if (missileRb != null) {
+            missileRb.AddForce(missileSpawnPoint.forward * 50f, ForceMode.Impulse);
+        }
+
+        Destroy(missile, 5f); // Auto-destroy after 5 seconds
+    }
+    private void ResetNOS() {
+        speed /= nosMultiplier;
+        Debug.Log("NOS effect ended of AI.");
     }
 }
