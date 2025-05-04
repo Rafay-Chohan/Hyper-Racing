@@ -46,15 +46,13 @@ public class AIScript : MonoBehaviour
 
         // Steering (rotate toward waypoint)
         Quaternion targetRotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);//To be changed 
 
         // Adaptive speed (slow down for sharp turns)
         float distanceToWaypoint = direction.magnitude;
-        float targetSpeed = (distanceToWaypoint > brakeDistance) ? speed : speed * 0.01f;
-        currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, 0.1f);
-
+        
         // Physics-based movement
-        rb.AddForce(transform.forward * currentSpeed, ForceMode.Acceleration);
+        rb.AddForce(transform.forward * speed, ForceMode.Acceleration);
 
         // Progress to next waypoint
         if (distanceToWaypoint < 10f)

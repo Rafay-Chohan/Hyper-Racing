@@ -1179,7 +1179,7 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
-            m_FloatArgument: -0.5
+            m_FloatArgument: -0.7
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
@@ -1549,7 +1549,7 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
-            m_FloatArgument: 0.5
+            m_FloatArgument: 1
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
@@ -2019,6 +2019,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2369060491348006307, guid: 4d1624804e8167f479ab63c5302ff1d5, type: 3}
+      propertyPath: m_Drag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2369060491348006307, guid: 4d1624804e8167f479ab63c5302ff1d5, type: 3}
       propertyPath: m_Constraints
       value: 64
       objectReference: {fileID: 0}
@@ -2028,15 +2032,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7951749605284508683, guid: 4d1624804e8167f479ab63c5302ff1d5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.3
+      value: 3.61
       objectReference: {fileID: 0}
     - target: {fileID: 7951749605284508683, guid: 4d1624804e8167f479ab63c5302ff1d5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.001142323
+      value: 0.0001437664
       objectReference: {fileID: 0}
     - target: {fileID: 7951749605284508683, guid: 4d1624804e8167f479ab63c5302ff1d5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.11212921
+      value: 0.00000004284084
       objectReference: {fileID: 0}
     - target: {fileID: 7951749605284508683, guid: 4d1624804e8167f479ab63c5302ff1d5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2093,7 +2097,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypointsParent: {fileID: 1660397938}
   speed: 30
-  turnSpeed: 0.5
+  turnSpeed: 1
   brakeDistance: 20
 --- !u!1 &1126680224
 GameObject:
@@ -3537,7 +3541,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1664414876458967751, guid: 962069d79811c744f9ed51ec5304d4c4, type: 3}
       propertyPath: speed
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1664414876458967751, guid: 962069d79811c744f9ed51ec5304d4c4, type: 3}
       propertyPath: turnSpeed

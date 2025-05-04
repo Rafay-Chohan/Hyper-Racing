@@ -1092,7 +1092,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1664414876458967751, guid: 962069d79811c744f9ed51ec5304d4c4, type: 3}
       propertyPath: turnSpeed
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1664414876458967751, guid: 962069d79811c744f9ed51ec5304d4c4, type: 3}
       propertyPath: gameManager
@@ -1270,6 +1270,10 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1013999947}
+    - target: {fileID: 6949156102755153941, guid: cc3ef5b0ccf85964c880ce0e3d8e06a8, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
+      value: -0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 8066073482121130914, guid: cc3ef5b0ccf85964c880ce0e3d8e06a8, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1286,6 +1290,10 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1013999947}
+    - target: {fileID: 8221079325417924438, guid: cc3ef5b0ccf85964c880ce0e3d8e06a8, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9076814790772309924, guid: cc3ef5b0ccf85964c880ce0e3d8e06a8, type: 3}
       propertyPath: m_Name
       value: Controls Canvas
