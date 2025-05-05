@@ -422,6 +422,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1660397938}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &310429397 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7435772921751561592, guid: 962069d79811c744f9ed51ec5304d4c4, type: 3}
+  m_PrefabInstance: {fileID: 672884833334465457}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &310429399
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 310429397}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.85, y: 0.93, z: 4.34}
+  m_Center: {x: 0, y: 0.85, z: -0.018977284}
 --- !u!1001 &331387211
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2545,7 +2571,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7435772921751561592, guid: 962069d79811c744f9ed51ec5304d4c4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 310429399}
   m_SourcePrefab: {fileID: 100100000, guid: 962069d79811c744f9ed51ec5304d4c4, type: 3}
 --- !u!1001 &7221691278184820504
 PrefabInstance:
@@ -2602,6 +2631,10 @@ PrefabInstance:
     - target: {fileID: 5568420245349099657, guid: 41bc69a7091eb8249b0e4c235962d16d, type: 3}
       propertyPath: m_Name
       value: AI Car 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7973971070138670438, guid: 41bc69a7091eb8249b0e4c235962d16d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
