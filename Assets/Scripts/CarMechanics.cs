@@ -14,13 +14,27 @@ public class CarMechanics : MonoBehaviour
     private string powerUpName;
     bool isPowerUpAvailable = false;
     private float nosMultiplier = 2f; // nosMultiplier for speed boost
-    private float nosDuration = 3f; // Duration of NOS effect
+    private float nosDuration = 3f; // Duration of NOS effect 
 
     [Header("Missile Settings")]
     public Transform missileSpawnPoint; // Assign in Inspector (empty GameObject at rear of car)
     public GameObject missilePrefab;
-    void Start() {
+
+    public ParticleSystem leftExhaust;
+    public ParticleSystem rightExhaust;
+
+    void Start() 
+    {
         rb = GetComponent<Rigidbody>();
+        if (gameManager == null)
+        {
+            gameManager = FindObjectOfType<GameManager>();
+            if (gameManager == null)
+            {
+                Debug.LogError("GameManager not found in scene!", this);
+                return;
+            }
+        }
     }
 
     void FixedUpdate() 
@@ -68,10 +82,15 @@ public class CarMechanics : MonoBehaviour
         Debug.Log("Power-up activated: " + powerUpName);
         
     }
-    public void UsePowerUp(){
+    public void UsePowerUp()
+    {
         if (isPowerUpAvailable) {
             switch (powerUpName) {
                 case "Nitro":
+                    if (leftExhaust != null && !leftExhaust.isPlaying)
+                        leftExhaust.Play();
+                    if (rightExhaust != null && !rightExhaust.isPlaying)
+                        rightExhaust.Play();
                     speed *= nosMultiplier;
                     Invoke(nameof(ResetNOS), nosDuration); // Duration of NOS effect
                     break;

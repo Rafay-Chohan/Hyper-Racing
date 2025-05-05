@@ -25,6 +25,16 @@ public class CheckpointManager : MonoBehaviour
             Debug.LogError("CheckeredFlag not found in siblings!", this);
             return;
         }
+
+        if (gameManager == null)
+        {
+            gameManager = FindObjectOfType<GameManager>();
+            if (gameManager == null)
+            {
+                Debug.LogError("GameManager not found in scene!", this);
+                return;
+            }
+        }
     }
 
     public void ResetCheckpoints()
