@@ -1,10 +1,10 @@
-1.Player Car Mechanics
+	1.Player Car Mechanics
 
 	Steering (left/right virtual buttons).  Done Rafay 4/5/2025
 
 	Acceleration/deceleration (gas/brake).	Done Rafay 4/5/2025
 
-	Bug where car starts tilting
+	Bug where car starts tilting Fixed Rafay 5/5/2025
 
 2.Power-Up System
 
@@ -22,6 +22,8 @@
 
 	Competitive behavior (variable speed/difficulty). Partially Done Isbah 4/5/2025
 
+	Bug waypoints need to be adjusted
+
 4.Race Mechanics
 
 	Lap counter, finish line detection. Done Isbah 4/5/2025
@@ -38,11 +40,20 @@
 
 6.UI/UX
 
-	Start screen (Play, Exit, Options). Partially Done Zophiel 4/5/2025
+	Start screen (Play, Exit, Options). Partially Done Zophiel 4/5/2025, Completed by Zophiel 5/5/2025
 
 	In-game HUD (speedometer, power-up slots). Partially Done Zophiel 4/5/2025
 
 	Results screen (win/lose, rewards placeholder). Partially Done Zophiel 4/5/2025
+
+	Pause Screen (Canvas done functionality left Zophiel 5/5/2025
+
+7.Progression System
+	In-Game Currency and Store
+	Progression to unlock maps
+
+	Complete system with earning logic, storing ,utilization functionality
+	 
 
 
 Order of implementation
