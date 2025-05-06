@@ -33,6 +33,27 @@ public class GameManager : MonoBehaviour
         checkpointText.text = $"{currentCheckpoint}/{totalCheckpoints}";
     }
 
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+    }
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f; 
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+    }
+
+    public void LoadMainMenu()
+    {
+        Time.timeScale = 1f;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Main");
+    }
+
     public void QuitGame()
     {
         Application.Quit();
