@@ -2060,6 +2060,18 @@ PrefabInstance:
       propertyPath: checkpointText
       value: 
       objectReference: {fileID: 1665236864}
+    - target: {fileID: 5702395645173298371, guid: 401c9acb90b6f3443a004c961ee882e3, type: 3}
+      propertyPath: nitroPowerupImage
+      value: 
+      objectReference: {fileID: 331387213}
+    - target: {fileID: 5702395645173298371, guid: 401c9acb90b6f3443a004c961ee882e3, type: 3}
+      propertyPath: defaultPowerupImage
+      value: 
+      objectReference: {fileID: 331387214}
+    - target: {fileID: 5702395645173298371, guid: 401c9acb90b6f3443a004c961ee882e3, type: 3}
+      propertyPath: missilePowerupImage
+      value: 
+      objectReference: {fileID: 331387212}
     - target: {fileID: 8915794090262779399, guid: 401c9acb90b6f3443a004c961ee882e3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 127.27351
@@ -2621,6 +2633,21 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
+--- !u!1 &331387212 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5877347750828536426, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
+  m_PrefabInstance: {fileID: 331387211}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &331387213 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 875860114843796750, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
+  m_PrefabInstance: {fileID: 331387211}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &331387214 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3946251015852641618, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
+  m_PrefabInstance: {fileID: 331387211}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &333101595
 PrefabInstance:
   m_ObjectHideFlags: 0

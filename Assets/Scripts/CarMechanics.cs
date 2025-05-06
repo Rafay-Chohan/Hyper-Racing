@@ -80,8 +80,9 @@ public class CarMechanics : MonoBehaviour
         this.powerUpName = powerUpName;
         isPowerUpAvailable = true;
         Debug.Log("Power-up activated: " + powerUpName);
-        
+        gameManager.UpdatePowerupUI(powerUpName); 
     }
+    
     public void UsePowerUp()
     {
         if (isPowerUpAvailable) {
@@ -101,6 +102,8 @@ public class CarMechanics : MonoBehaviour
                     Debug.Log("Unknown power-up: " + powerUpName);
                     break;
             }
+            
+            gameManager.UpdatePowerupUI("None");
             isPowerUpAvailable = false; // Reset power-up availability
         } else {
             Debug.Log("No power-up available to use.");

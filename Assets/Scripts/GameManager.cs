@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     private float minNeedleRotationAngle = 220f; 
     private float maxNeedleRotationAngle = -44f;
     private float desiredNeedlePosition = 0f;
+    public GameObject defaultPowerupImage;
+    public GameObject nitroPowerupImage; 
+    public GameObject missilePowerupImage;
 
     // checkpoint variables
     public TextMeshProUGUI checkpointText;
@@ -46,6 +49,26 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+    }
+
+    public void UpdatePowerupUI(string powerupName)
+    {
+        defaultPowerupImage.SetActive(false);
+        nitroPowerupImage.SetActive(false);
+        missilePowerupImage.SetActive(false);
+
+        switch (powerupName)
+        {
+            case "Nitro":
+                nitroPowerupImage.SetActive(true);
+                break;
+            case "Missile":
+                missilePowerupImage.SetActive(true);
+                break;
+            default:
+                defaultPowerupImage.SetActive(true);
+                break;
+        }
     }
 
     public void LoadMainMenu()

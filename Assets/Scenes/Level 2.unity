@@ -142,6 +142,18 @@ PrefabInstance:
       propertyPath: checkpointText
       value: 
       objectReference: {fileID: 801968541}
+    - target: {fileID: 5702395645173298371, guid: 401c9acb90b6f3443a004c961ee882e3, type: 3}
+      propertyPath: nitroPowerupImage
+      value: 
+      objectReference: {fileID: 801968544}
+    - target: {fileID: 5702395645173298371, guid: 401c9acb90b6f3443a004c961ee882e3, type: 3}
+      propertyPath: defaultPowerupImage
+      value: 
+      objectReference: {fileID: 801968545}
+    - target: {fileID: 5702395645173298371, guid: 401c9acb90b6f3443a004c961ee882e3, type: 3}
+      propertyPath: missilePowerupImage
+      value: 
+      objectReference: {fileID: 801968543}
     - target: {fileID: 8915794090262779399, guid: 401c9acb90b6f3443a004c961ee882e3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 127.27351
@@ -6851,10 +6863,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 7059350}
-    - target: {fileID: 268179361750759202, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadMainMenu
-      objectReference: {fileID: 0}
     - target: {fileID: 687887578986414563, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -6863,14 +6871,6 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 672884833334465458}
-    - target: {fileID: 687887578986414563, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetTurnInput
-      objectReference: {fileID: 0}
-    - target: {fileID: 687887578986414563, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
-      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetTurnInput
-      objectReference: {fileID: 0}
     - target: {fileID: 764204393739221715, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -6879,14 +6879,6 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 672884833334465458}
-    - target: {fileID: 764204393739221715, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetGasInput
-      objectReference: {fileID: 0}
-    - target: {fileID: 764204393739221715, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
-      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetGasInput
-      objectReference: {fileID: 0}
     - target: {fileID: 2118705463773476141, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -6895,14 +6887,6 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 672884833334465458}
-    - target: {fileID: 2118705463773476141, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetTurnInput
-      objectReference: {fileID: 0}
-    - target: {fileID: 2118705463773476141, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
-      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetTurnInput
-      objectReference: {fileID: 0}
     - target: {fileID: 3796705517820453943, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
       propertyPath: m_Name
       value: --UI Game
@@ -6987,6 +6971,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3946251015852641618, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
+      propertyPath: m_Name
+      value: Powerup Placeholder
+      objectReference: {fileID: 0}
     - target: {fileID: 4432042654796112450, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -6995,46 +6983,22 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 672884833334465458}
-    - target: {fileID: 4432042654796112450, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetGasInput
-      objectReference: {fileID: 0}
-    - target: {fileID: 4432042654796112450, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
-      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetGasInput
-      objectReference: {fileID: 0}
     - target: {fileID: 4618259811296713907, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 7059350}
-    - target: {fileID: 4618259811296713907, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ResumeGame
-      objectReference: {fileID: 0}
     - target: {fileID: 6598430586454478649, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 7059350}
-    - target: {fileID: 6598430586454478649, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: RestartGame
-      objectReference: {fileID: 0}
     - target: {fileID: 7737764395979064448, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 672884833334465458}
-    - target: {fileID: 7737764395979064448, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UsePowerUp
-      objectReference: {fileID: 0}
     - target: {fileID: 8131829908340033232, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 7059350}
-    - target: {fileID: 8131829908340033232, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: PauseGame
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7054,6 +7018,21 @@ MonoBehaviour:
 --- !u!1 &801968542 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1499069787699308546, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
+  m_PrefabInstance: {fileID: 801968540}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &801968543 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5877347750828536426, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
+  m_PrefabInstance: {fileID: 801968540}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &801968544 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 875860114843796750, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
+  m_PrefabInstance: {fileID: 801968540}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &801968545 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3946251015852641618, guid: 5f35d31d30ad7f946b47bda89dc8f059, type: 3}
   m_PrefabInstance: {fileID: 801968540}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &804311905
