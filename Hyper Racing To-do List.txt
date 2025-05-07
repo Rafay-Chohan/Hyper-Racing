@@ -14,7 +14,7 @@
 
 	Pickup spawning logic on tracks. Done Rafay 4/5/2025
 
-	Add icons for power-ups
+	Add icons for power-ups Done Zophiel 6/4/2025
 
 3.Drivatar AI
 
@@ -22,7 +22,9 @@
 
 	Competitive behavior (variable speed/difficulty). Partially Done Isbah 4/5/2025
 
-	Bug waypoints need to be adjusted
+	Bug waypoints need to be adjusted Done Isbah 6/5/2025
+
+	Add 3 drivatars in every level
 
 4.Race Mechanics
 
@@ -34,19 +36,21 @@
 
 	1–2 simple tracks with boundaries (MODULAR DESIGN). Done Isbah 4/5/2025
 
-		1) Lines on roads
-		2) Road boundary
+		1) Lines on roads Done Isbah 6/5/2025
+		2) Road boundary Done Isbah 6/5/2025
 		3) Prominent Finish line
+		4) fix line above road bug Done Isbah 7/5/2025
+		5) Add starting countdown
 
 6.UI/UX
 
 	Start screen (Play, Exit, Options). Partially Done Zophiel 4/5/2025, Completed by Zophiel 5/5/2025
 
-	In-game HUD (speedometer, power-up slots). Partially Done Zophiel 4/5/2025
+	In-game HUD (speedometer, power-up slots). Partially Done Zophiel 4/5/2025, Done Zophiel 6/5/2025
 
 	Results screen (win/lose, rewards placeholder). Partially Done Zophiel 4/5/2025
 
-	Pause Screen (Canvas done functionality left Zophiel 5/5/2025
+	Pause Screen (Canvas done functionality left Zophiel 5/5/2025) , Done Zophiel 6/5/2025
 
 7.Progression System
 	In-Game Currency and Store
