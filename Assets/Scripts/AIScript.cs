@@ -19,6 +19,21 @@ public class AIScript : MonoBehaviour
     public Transform missileSpawnPoint; // Assign in Inspector (empty GameObject at rear of car)
     public GameObject missilePrefab;
 
+    [Header("Collision Recovery")]
+    public LayerMask barrierLayer;
+    private float maxStuckTime = 3f; // Time before resetting
+    private float cooldown = 1f;
+    
+    private float stuckTimer = 0f;
+    private bool isCollidingWithBarrier = false;
+    private Vector3 lastSafePosition;
+
+    // Lap count
+    private int currentLap = 0;
+    private int totalLaps;
+    private LapManager lapManager;
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -36,11 +51,15 @@ public class AIScript : MonoBehaviour
         {
             Debug.LogError("No waypoints parent assigned!", this);
         }
+
+        lapManager = FindObjectOfType<LapManager>();
+        totalLaps = lapManager.totalLaps;
+        lastSafePosition = transform.position;
     }
 
     void FixedUpdate()
     {
-        if (waypoints == null || currentWaypoint >= waypoints.Length) 
+        if (waypoints == null || (currentWaypoint >= waypoints.Length && currentLap >= totalLaps)) 
         {
             rb.velocity = Vector3.zero;  // Stop at final waypoint
             return;
@@ -64,6 +83,35 @@ public class AIScript : MonoBehaviour
         if (distanceToWaypoint < 10f)
         {
             currentWaypoint++;
+            if (currentWaypoint >= waypoints.Length)
+            {
+                currentLap++;
+                if (currentLap < totalLaps)
+                {    
+                    currentWaypoint = 0;
+                    Debug.Log($"AI in Lap: {currentLap}");
+                }
+            }
+            lastSafePosition = transform.position;
+        }
+
+        // check if stuck
+        if (!isCollidingWithBarrier) 
+        {
+            cooldown -= Time.fixedDeltaTime;
+            if (cooldown <= 0f) 
+            {
+                stuckTimer = 0f;
+            }
+        }
+        else 
+        {
+            cooldown = 1f; // Reset cooldown if touching barriers
+            stuckTimer += Time.fixedDeltaTime;
+            if (stuckTimer >= maxStuckTime) 
+            {
+                ResetToLastWaypoint();
+            }
         }
     }
 
@@ -121,5 +169,37 @@ public class AIScript : MonoBehaviour
     private void ResetNOS() {
         speed /= nosMultiplier;
         Debug.Log("NOS effect ended of AI.");
+    }
+
+    void OnCollisionStay(Collision collision)
+    {
+        if (((1 << collision.gameObject.layer) & barrierLayer) != 0)
+        {
+            isCollidingWithBarrier = true;
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (((1 << collision.gameObject.layer) & barrierLayer) != 0)
+        {
+            isCollidingWithBarrier = false;
+        }
+    }
+
+    private void ResetToLastWaypoint()
+    {
+        transform.position = lastSafePosition;
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        if (currentWaypoint > 0)
+            currentWaypoint--;
+        else
+            currentWaypoint = waypoints.Length - 1;
+        Debug.Log($"Reset to checkpoint: {currentWaypoint}");
+        stuckTimer = 0f;
+        isCollidingWithBarrier = false;
+        
+        Debug.Log("AI car was stuck - reset to last waypoint!");
     }
 }

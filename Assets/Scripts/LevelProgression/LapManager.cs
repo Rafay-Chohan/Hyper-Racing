@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LapManager : MonoBehaviour
 {
-    [SerializeField] int totalLaps;
+    public int totalLaps;
     private CheckpointManager manager;
 
     // Start is called before the first frame update
