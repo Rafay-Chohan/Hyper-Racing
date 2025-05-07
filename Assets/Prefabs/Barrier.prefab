@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6573682826681201620}
   - component: {fileID: 2293137133645428586}
   - component: {fileID: 6363281907250402912}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: White
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 1741468451901377505}
   - component: {fileID: 8356932855621778708}
   - component: {fileID: 8126625631216234894}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,7 +219,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8513974272412567880}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Barrier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,9 +252,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8513974272412567880}
     m_Modifications:
+    - target: {fileID: 1317521755811510, guid: f48ca42bbf7370343a33a9e87b1d9fdb, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1341532629177192, guid: f48ca42bbf7370343a33a9e87b1d9fdb, type: 3}
       propertyPath: m_Name
       value: Sideway 10 prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 1341532629177192, guid: f48ca42bbf7370343a33a9e87b1d9fdb, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4278621369827266, guid: f48ca42bbf7370343a33a9e87b1d9fdb, type: 3}
       propertyPath: m_LocalScale.z
