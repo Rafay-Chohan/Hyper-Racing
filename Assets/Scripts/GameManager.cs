@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
@@ -34,6 +35,11 @@ public class GameManager : MonoBehaviour
     public void UpdateCheckpointUI(int currentCheckpoint, int totalCheckpoints)
     {
         checkpointText.text = $"{currentCheckpoint}/{totalCheckpoints}";
+        checkpointText.transform.localScale = Vector3.zero;
+
+        checkpointText.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack);
+
+        // play a sound when checkpoint reached too
     }
 
     public void PauseGame()
