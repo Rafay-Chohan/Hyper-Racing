@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour
     // checkpoint variables
     public TextMeshProUGUI checkpointText;
 
+    // race over variables
+    public GameObject gameOverUI;
+
     void Start()
     {
 
@@ -57,6 +60,16 @@ public class GameManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
+    public void RaceOver()
+    {
+        Time.timeScale = 0.2f; // everything runs at 20% speed
+        StartCoroutine(ShowGameOverUIAfterDelay());
+    }
+    IEnumerator ShowGameOverUIAfterDelay()
+    {
+        yield return new WaitForSecondsRealtime(2f);
+        gameOverUI.SetActive(true);
+    }
     public void UpdatePowerupUI(string powerupName)
     {
         defaultPowerupImage.SetActive(false);
