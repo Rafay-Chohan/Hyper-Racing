@@ -75,9 +75,15 @@ public class AIScript : MonoBehaviour
 
         // Adaptive speed (slow down for sharp turns)
         float distanceToWaypoint = direction.magnitude;
-        
-        // Physics-based movement
+
         rb.AddForce(transform.forward * speed, ForceMode.Acceleration);
+
+        // Add BRAKING when close to waypoint
+        if (distanceToWaypoint < brakeDistance)
+        {
+            // Counteract the forward force to slow down
+            rb.AddForce(-rb.velocity.normalized * speed * 0.8f, ForceMode.Acceleration);
+        }
 
         // Progress to next waypoint
         if (distanceToWaypoint < 10f)
@@ -89,7 +95,7 @@ public class AIScript : MonoBehaviour
                 if (currentLap < totalLaps)
                 {    
                     currentWaypoint = 0;
-                    Debug.Log($"AI in Lap: {currentLap}");
+                    Debug.Log($"AI in Lap: {currentLap + 1}");
                 }
             }
             lastSafePosition = transform.position;

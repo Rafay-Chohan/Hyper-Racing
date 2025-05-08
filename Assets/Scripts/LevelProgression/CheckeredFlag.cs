@@ -29,10 +29,10 @@ public class CheckeredFlag : MonoBehaviour
                 manager.LapCompleted(currentLap);
                 lapCompletedFully = false;
             }
-        }
-        else
-        {
-            Debug.Log($"Tryna be smart huh?");
+            else
+            {
+                Debug.Log($"Tryna be smart huh?");
+            }
         }
     }
 }
