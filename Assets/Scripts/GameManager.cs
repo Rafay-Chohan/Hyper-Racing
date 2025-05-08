@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class GameManager : MonoBehaviour
 
     // checkpoint variables
     public TextMeshProUGUI checkpointText;
+
+    // race over variables
+    public GameObject gameOverUI;
 
     void Start()
     {
@@ -34,6 +38,11 @@ public class GameManager : MonoBehaviour
     public void UpdateCheckpointUI(int currentCheckpoint, int totalCheckpoints)
     {
         checkpointText.text = $"{currentCheckpoint}/{totalCheckpoints}";
+        checkpointText.transform.localScale = Vector3.zero;
+
+        checkpointText.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack);
+
+        // play a sound when checkpoint reached too
     }
 
     public void PauseGame()
@@ -51,6 +60,16 @@ public class GameManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
+    public void RaceOver()
+    {
+        Time.timeScale = 0.2f; // everything runs at 20% speed
+        StartCoroutine(ShowGameOverUIAfterDelay());
+    }
+    IEnumerator ShowGameOverUIAfterDelay()
+    {
+        yield return new WaitForSecondsRealtime(2f);
+        gameOverUI.SetActive(true);
+    }
     public void UpdatePowerupUI(string powerupName)
     {
         defaultPowerupImage.SetActive(false);
