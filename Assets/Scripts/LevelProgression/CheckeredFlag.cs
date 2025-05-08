@@ -29,8 +29,11 @@ public class CheckeredFlag : MonoBehaviour
                 manager.LapCompleted(currentLap);
                 lapCompletedFully = false;
             }
-            else
-            {
+        }
+        else
+        {
+            if (other.CompareTag("Player"))
+            { 
                 Debug.Log($"Tryna be smart huh?");
             }
         }
