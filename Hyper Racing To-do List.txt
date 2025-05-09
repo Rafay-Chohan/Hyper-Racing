@@ -61,10 +61,10 @@
 	 
 8. Sound Effects
 	Main Menu Sound
-	UI click sound
-	Car moving sound
+	UI click sound Done Rafay 9/5/2025
+	Car moving sound Done Rafay 9/5/2025
 	Powerup pickup sound
-	Powerup use sound
+	Powerup use sound (Done for NOS)
 	Collision sound
 	
 
