@@ -24,13 +24,13 @@
 
 	Bug waypoints need to be adjusted Done Isbah 6/5/2025
 
-	Add 3 drivatars in every level
+	Add 3 drivatars in every level Done Isbah 8/5/2025
 
 4.Race Mechanics
 
 	Lap counter, finish line detection. Done Isbah 4/5/2025
 
-	Position Detection (UI placeholder).
+	Position Detection.
 
 5.Track Design
 
@@ -38,8 +38,8 @@
 
 		1) Lines on roads Done Isbah 6/5/2025
 		2) Road boundary Done Isbah 6/5/2025
-		3) Prominent Finish line
-		4) fix line above road bug Done Isbah 7/5/2025
+		3) fix line above road bug Done Isbah 7/5/2025
+		4) Prominent Finish line
 		5) Add starting countdown
 
 6.UI/UX
@@ -52,13 +52,21 @@
 
 	Pause Screen (Canvas done functionality left Zophiel 5/5/2025) , Done Zophiel 6/5/2025
 
+
 7.Progression System
 	In-Game Currency and Store
 	Progression to unlock maps
 
 	Complete system with earning logic, storing ,utilization functionality
 	 
-
+8. Sound Effects
+	Main Menu Sound
+	UI click sound
+	Car moving sound
+	Powerup pickup sound
+	Powerup use sound
+	Collision sound
+	
 
 Order of implementation
 	1. Movement + Controls → 2. Track System + Environment → 3. Power-Ups → 4. Drivatars → 5. Game Loop + Progression → 6. UI
