@@ -176,6 +176,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void NextLevel()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = currentSceneIndex + 1;
+
+        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            Time.timeScale = 1f; // reset time scale in case it's slowed down
+            SceneManager.LoadScene(nextSceneIndex);
+        }
+        else
+        {
+            Debug.Log("No more levels. Returning to main menu.");
+            LoadMainMenu(); // or handle game completion
+        }
+    }
     public void LoadMainMenu()
     {
         Time.timeScale = 1f;
