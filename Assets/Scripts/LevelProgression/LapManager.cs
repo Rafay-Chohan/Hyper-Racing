@@ -26,6 +26,11 @@ public class LapManager : MonoBehaviour
         }
     }
 
+    public int GetTotalLaps()
+    {
+        return totalLaps;
+    }
+
     public void LapCompleted(int lapNumber)
     {
         if (lapNumber > totalLaps)
@@ -35,6 +40,7 @@ public class LapManager : MonoBehaviour
         }
         else
         {
+
             Debug.Log($"Lap:{lapNumber}");
             manager.ResetCheckpoints();
         }
