@@ -38,10 +38,13 @@ public class AIScript : MonoBehaviour
 
     public float knockUpForce = 5000f;
     public float spinForce = 5000f;
+    private float triggerDuration = 1.5f;
+    private Collider carCollider;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        carCollider = GetComponent<Collider>();
 
         // Collect waypoints
         if (waypointsParent != null)
@@ -165,7 +168,7 @@ public class AIScript : MonoBehaviour
         // Add force backward (since missiles fire at opponents behind)
         Rigidbody missileRb = missile.GetComponent<Rigidbody>();
         if (missileRb != null) {
-            missileRb.AddForce(missileSpawnPoint.forward * 60f, ForceMode.Impulse);
+            missileRb.AddForce(missileSpawnPoint.forward * 80f, ForceMode.Impulse);
         }
 
         Destroy(missile, 5f); // Auto-destroy after 5 seconds
@@ -209,10 +212,19 @@ public class AIScript : MonoBehaviour
     public void KnockUp()
     {
         Debug.Log("AI car knocked up!");
+        //StartCoroutine(EnableTriggerTemporarily());
         rb.AddForce(Vector3.up * knockUpForce, ForceMode.Impulse);
         rb.velocity = Vector3.zero;
         rb.AddTorque(Vector3.up * spinForce, ForceMode.Impulse);
     }
-
+    
+    private IEnumerator EnableTriggerTemporarily()
+    {
+        
+            carCollider.isTrigger = true;
+            yield return new WaitForSeconds(triggerDuration);
+            carCollider.isTrigger = false;
+        
+    }
     
 }
