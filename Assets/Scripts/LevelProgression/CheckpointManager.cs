@@ -12,6 +12,8 @@ public class CheckpointManager : MonoBehaviour
     private bool lapCompletedFully = false;
     private bool raceStarted = false; // NEW
 
+    public GameManager gameManager;
+
 
     void Awake()
     {
@@ -48,7 +50,7 @@ public class CheckpointManager : MonoBehaviour
         }
         currentCheckpoint = 1;
         lapCompletedFully = true;
-        GameManager.Instance.UpdateCheckpointUI(currentCheckpoint, totalCheckpoints);
+        gameManager.UpdateCheckpointUI(currentCheckpoint, totalCheckpoints);
     }
 
     public void CheckpointReached(int checkpointNumber)
@@ -67,7 +69,7 @@ public class CheckpointManager : MonoBehaviour
             checkpoints[currentCheckpoint].SetActive(true);
             currentCheckpoint++;
             Debug.Log($"Checkpoint {currentCheckpoint - 1} passed!");
-            GameManager.Instance.UpdateCheckpointUI(currentCheckpoint, totalCheckpoints);
+            gameManager.UpdateCheckpointUI(currentCheckpoint, totalCheckpoints);
         }
         else
         {

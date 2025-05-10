@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; }
 
     // Progression variables
     public int playerXP;
@@ -37,17 +36,6 @@ public class GameManager : MonoBehaviour
     public int position;
     
 
-    void Awake()
-    {
-        // Singleton setup
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
     
     void Start()
     {

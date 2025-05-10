@@ -25,15 +25,12 @@ public class CarMechanics : MonoBehaviour
     public GameObject positionText;
     public TextMeshProUGUI PosText;
 
-
- 
-
-
+    public GameManager gameManager;
    void Start()
     {
         rb = GetComponent<Rigidbody>();
         SplineLapManager.Instance.RegisterRacer(transform, gameObject.name);
-        GameManager.Instance.OnRaceEnded += PositionTextDisable; // Subscribe to the event
+        gameManager.OnRaceEnded += PositionTextDisable; // Subscribe to the event
         
         if (SkinManager.Instance == null || SkinManager.Instance.selectedSkin == null)
         {
@@ -75,7 +72,7 @@ public class CarMechanics : MonoBehaviour
 
         SplineLapManager.Instance.SetRacerLap(transform, LapManager.Instance.currentLap);
         int myPosition = SplineLapManager.Instance.GetRacerPosition(transform);
-        GameManager.Instance.position=myPosition;
+        gameManager.position=myPosition;
         PosText.text = $"{myPosition} / {SplineLapManager.Instance.racers.Count}";
 
     }
@@ -88,7 +85,7 @@ public class CarMechanics : MonoBehaviour
         float moveInput = Input.GetAxis("Vertical");
         rb.AddForce(transform.forward * moveInput * speed, ForceMode.Acceleration);
         currentSpeed = new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude;
-        GameManager.Instance.UpdateNeedle(currentSpeed);
+        gameManager.UpdateNeedle(currentSpeed);
 
         if (currentSpeed > 0.5f)
         {
@@ -116,7 +113,7 @@ public class CarMechanics : MonoBehaviour
         this.powerUpName = powerUpName;
         isPowerUpAvailable = true;
         Debug.Log("Power-up activated: " + powerUpName);
-        GameManager.Instance.UpdatePowerupUI(powerUpName); 
+        gameManager.UpdatePowerupUI(powerUpName); 
     }
     
     public void UsePowerUp()
@@ -139,7 +136,7 @@ public class CarMechanics : MonoBehaviour
                     break;
             }
             
-            GameManager.Instance.UpdatePowerupUI("None");
+            gameManager.UpdatePowerupUI("None");
             isPowerUpAvailable = false; // Reset power-up availability
         } else {
             Debug.Log("No power-up available to use.");

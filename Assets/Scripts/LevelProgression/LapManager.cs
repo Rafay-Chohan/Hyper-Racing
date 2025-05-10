@@ -16,6 +16,8 @@ public class LapManager : MonoBehaviour
     public TextMeshProUGUI LapText;
     public GameObject LapUI; // Reference to the UI element that shows the lap count
 
+    public GameManager gameManager;
+
     void Awake()
     {
         // Singleton setup
@@ -36,7 +38,7 @@ public class LapManager : MonoBehaviour
 
     void Start()
     {
-        GameManager.Instance.OnRaceEnded += DisableLapUI; // Subscribe to
+        gameManager.OnRaceEnded += DisableLapUI; // Subscribe to
        
     }
 
@@ -52,7 +54,7 @@ public class LapManager : MonoBehaviour
         if (currentLap > totalLaps)
         {
             Debug.Log("Race Over");
-            GameManager.Instance.RaceOver();
+            gameManager.RaceOver();
         }
         else
         {

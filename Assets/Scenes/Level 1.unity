@@ -132,6 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 29468641}
   - component: {fileID: 29468640}
+  - component: {fileID: 29468642}
   m_Layer: 0
   m_Name: Spline
   m_TagString: Untagged
@@ -694,6 +695,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &29468642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29468639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5ab752f08f708d44b6856a472df5048, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  splineContainer: {fileID: 29468640}
+  totalLaps: 2
+  racers: []
 --- !u!1 &33917787
 GameObject:
   m_ObjectHideFlags: 0
@@ -3342,7 +3358,7 @@ PrefabInstance:
     - target: {fileID: 5242028956028821650, guid: 72a8551be9c8f524d85e50440f322e46, type: 3}
       propertyPath: pickupSound
       value: 
-      objectReference: {fileID: 742973614}
+      objectReference: {fileID: 0}
     - target: {fileID: 5799534633766759677, guid: 72a8551be9c8f524d85e50440f322e46, type: 3}
       propertyPath: m_Name
       value: PowerUp (2)
@@ -7774,53 +7790,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1678940277135402758, guid: aaebb0ebaab7dea48abfcee3ef35ec4b, type: 3}
   m_PrefabInstance: {fileID: 476113923}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &477398251
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 477398253}
-  - component: {fileID: 477398252}
-  m_Layer: 0
-  m_Name: SplineLapManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &477398252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 477398251}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5ab752f08f708d44b6856a472df5048, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  splineContainer: {fileID: 29468640}
-  totalLaps: 0
-  racers: []
---- !u!4 &477398253
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 477398251}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 164.0999, y: -163.75745, z: 25.119057}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &479805971
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11179,7 +11148,7 @@ PrefabInstance:
     - target: {fileID: 6837614651340713403, guid: b64012c961abc3a4aa9e6d66a2cd9f16, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: -5273032150254867917, guid: d22d6db14c2167e44b5186b17821da54, type: 2}
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 7083455895545938411, guid: b64012c961abc3a4aa9e6d66a2cd9f16, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.3
@@ -11301,8 +11270,8 @@ MonoBehaviour:
   - {fileID: 895185808}
   flagTextBox: {fileID: 584486986}
   lights:
-  - {fileID: 90164744}
-  - {fileID: 1030606928}
+  - {fileID: 816839343}
+  - {fileID: 1461843789}
 --- !u!1001 &642661865
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13470,6 +13439,11 @@ PrefabInstance:
       addedObject: {fileID: 1606920440}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2336ff08abc44174c96c9a26f30ae064, type: 3}
+--- !u!1 &816839343 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2466856238673138764, guid: b64012c961abc3a4aa9e6d66a2cd9f16, type: 3}
+  m_PrefabInstance: {fileID: 584486984}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &817225208
 GameObject:
   m_ObjectHideFlags: 0
@@ -18883,7 +18857,7 @@ PrefabInstance:
     - target: {fileID: 5242028956028821650, guid: 72a8551be9c8f524d85e50440f322e46, type: 3}
       propertyPath: pickupSound
       value: 
-      objectReference: {fileID: 697944926}
+      objectReference: {fileID: 0}
     - target: {fileID: 5242028956028821650, guid: 72a8551be9c8f524d85e50440f322e46, type: 3}
       propertyPath: powerUpName
       value: Missile
@@ -19602,6 +19576,11 @@ PrefabInstance:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1678940277135402758, guid: aaebb0ebaab7dea48abfcee3ef35ec4b, type: 3}
   m_PrefabInstance: {fileID: 1452113907}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1461843789 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6886424170723587159, guid: b64012c961abc3a4aa9e6d66a2cd9f16, type: 3}
+  m_PrefabInstance: {fileID: 584486984}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1491260251
 PrefabInstance:
@@ -30050,4 +30029,3 @@ SceneRoots:
   - {fileID: 68863534}
   - {fileID: 1878565551}
   - {fileID: 29468641}
-  - {fileID: 477398253}
