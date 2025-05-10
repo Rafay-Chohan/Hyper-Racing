@@ -963,8 +963,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b073531c0665a7e44ba92780ecb1e1f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
-  turnSpeed: 20
+  speed: 40
+  turnSpeed: 35
   gasInput: 0
   turnInput: 0
   missileSpawnPoint: {fileID: 599646890517387698}
@@ -973,6 +973,9 @@ MonoBehaviour:
   rightExhaust: {fileID: 3724577413224728935}
   positionText: {fileID: 0}
   PosText: {fileID: 0}
+  knockUpForce: 5000
+  spinForce: 5000
+  gameManager: {fileID: 0}
 --- !u!65 &8289152098131666811
 BoxCollider:
   m_ObjectHideFlags: 0

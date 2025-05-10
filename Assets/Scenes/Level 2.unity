@@ -444,6 +444,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1628664374}
     m_Modifications:
     - target: {fileID: 4699004292283232944, guid: 41bc69a7091eb8249b0e4c235962d16d, type: 3}
+      propertyPath: speed
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4699004292283232944, guid: 41bc69a7091eb8249b0e4c235962d16d, type: 3}
       propertyPath: brakeDistance
       value: 30
       objectReference: {fileID: 0}
@@ -453,7 +457,7 @@ PrefabInstance:
       objectReference: {fileID: 1793436113}
     - target: {fileID: 4699004292283232944, guid: 41bc69a7091eb8249b0e4c235962d16d, type: 3}
       propertyPath: barrierLayer.m_Bits
-      value: 64
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5047638089352098355, guid: 41bc69a7091eb8249b0e4c235962d16d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5833,6 +5837,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1628664374}
     m_Modifications:
     - target: {fileID: 4699004292283232944, guid: 41bc69a7091eb8249b0e4c235962d16d, type: 3}
+      propertyPath: speed
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4699004292283232944, guid: 41bc69a7091eb8249b0e4c235962d16d, type: 3}
       propertyPath: brakeDistance
       value: 30
       objectReference: {fileID: 0}
@@ -5842,7 +5850,7 @@ PrefabInstance:
       objectReference: {fileID: 1793436113}
     - target: {fileID: 4699004292283232944, guid: 41bc69a7091eb8249b0e4c235962d16d, type: 3}
       propertyPath: barrierLayer.m_Bits
-      value: 64
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5047638089352098355, guid: 41bc69a7091eb8249b0e4c235962d16d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10268,6 +10276,8 @@ MonoBehaviour:
   rightExhaust: {fileID: 0}
   positionText: {fileID: 0}
   PosText: {fileID: 0}
+  knockUpForce: 5000
+  spinForce: 5000
   gameManager: {fileID: 0}
 --- !u!1001 &1148406476
 PrefabInstance:
@@ -14451,6 +14461,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1628664374}
     m_Modifications:
     - target: {fileID: 4699004292283232944, guid: 41bc69a7091eb8249b0e4c235962d16d, type: 3}
+      propertyPath: speed
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4699004292283232944, guid: 41bc69a7091eb8249b0e4c235962d16d, type: 3}
       propertyPath: brakeDistance
       value: 30
       objectReference: {fileID: 0}
@@ -14460,7 +14474,7 @@ PrefabInstance:
       objectReference: {fileID: 419663880}
     - target: {fileID: 4699004292283232944, guid: 41bc69a7091eb8249b0e4c235962d16d, type: 3}
       propertyPath: barrierLayer.m_Bits
-      value: 64
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5047638089352098355, guid: 41bc69a7091eb8249b0e4c235962d16d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16765,6 +16779,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1628664374}
     m_Modifications:
     - target: {fileID: 4699004292283232944, guid: 41bc69a7091eb8249b0e4c235962d16d, type: 3}
+      propertyPath: speed
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4699004292283232944, guid: 41bc69a7091eb8249b0e4c235962d16d, type: 3}
       propertyPath: brakeDistance
       value: 30
       objectReference: {fileID: 0}
@@ -16774,7 +16792,7 @@ PrefabInstance:
       objectReference: {fileID: 419663880}
     - target: {fileID: 4699004292283232944, guid: 41bc69a7091eb8249b0e4c235962d16d, type: 3}
       propertyPath: barrierLayer.m_Bits
-      value: 64
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5047638089352098355, guid: 41bc69a7091eb8249b0e4c235962d16d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -21839,7 +21857,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1664414876458967751, guid: 962069d79811c744f9ed51ec5304d4c4, type: 3}
       propertyPath: speed
-      value: 30
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 1664414876458967751, guid: 962069d79811c744f9ed51ec5304d4c4, type: 3}
       propertyPath: PosText
@@ -21847,7 +21865,7 @@ PrefabInstance:
       objectReference: {fileID: 1351608135}
     - target: {fileID: 1664414876458967751, guid: 962069d79811c744f9ed51ec5304d4c4, type: 3}
       propertyPath: turnSpeed
-      value: 30
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 1664414876458967751, guid: 962069d79811c744f9ed51ec5304d4c4, type: 3}
       propertyPath: gameManager
