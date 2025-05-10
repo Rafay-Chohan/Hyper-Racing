@@ -56,7 +56,6 @@ public class GameManager : MonoBehaviour
         checkpointText.text = $"{currentCheckpoint}/{totalCheckpoints}";
         checkpointText.transform.localScale = Vector3.zero;
         checkpointText.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack);
-        // TODO: play checkpoint sound here
     }
 
     public void PauseGame()
@@ -76,8 +75,7 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         Time.timeScale = 1f;
-        UnityEngine.SceneManagement.SceneManager.LoadScene(
-            UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void RaceOver()
@@ -190,8 +188,9 @@ public class GameManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
-    #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-    #endif
+        
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #endif
     }
 }
