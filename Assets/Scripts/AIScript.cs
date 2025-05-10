@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+
 
 public class AIScript : MonoBehaviour
 {
@@ -21,15 +23,14 @@ public class AIScript : MonoBehaviour
 
     [Header("Collision Recovery")]
     public LayerMask barrierLayer;
-    private float maxStuckTime = 3f; // Time before resetting
+    private float maxStuckTime = 3f;
     private float cooldown = 1f;
-    
     private float stuckTimer = 0f;
     private bool isCollidingWithBarrier = false;
     private Vector3 lastSafePosition;
 
     // Lap count
-    private int currentLap = 0;
+    private int currentLap = 1;
     private int totalLaps;
     private LapManager lapManager;
     public ParticleSystem leftExhaust;
@@ -38,88 +39,71 @@ public class AIScript : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        
-        // Auto-collect waypoints from parent's children
+
+        // Collect waypoints
         if (waypointsParent != null)
         {
-            waypoints = new Transform[waypointsParent.childCount];
-            for (int i = 0; i < waypointsParent.childCount; i++)
-            {
+            int count = waypointsParent.childCount;
+            waypoints = new Transform[count];
+            for (int i = 0; i < count; i++)
                 waypoints[i] = waypointsParent.GetChild(i);
-            }
-        }
-        else
-        {
-            Debug.LogError("No waypoints parent assigned!", this);
         }
 
-        lapManager = FindObjectOfType<LapManager>();
+        lapManager = LapManager.Instance;
         totalLaps = lapManager.totalLaps;
         lastSafePosition = transform.position;
+
+        SplineLapManager.Instance.RegisterRacer(transform, gameObject.name);
+        SplineLapManager.Instance.SetRacerLap(transform, currentLap);
     }
 
     void FixedUpdate()
     {
+        // Movement and waypoint logic unchanged
         if (waypoints == null || (currentWaypoint >= waypoints.Length && currentLap >= totalLaps)) 
         {
             rb.velocity = Vector3.zero;  // Stop at final waypoint
             return;
         }
-
-        // Calculate direction to waypoint
         Vector3 direction = waypoints[currentWaypoint].position - transform.position;
-        direction.y = 0;  // Ignore vertical difference
+        direction.y = 0;
+        Quaternion look = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, look, turnSpeed * Time.deltaTime);
 
-        // Steering (rotate toward waypoint)
-        Quaternion targetRotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);//To be changed 
-
-        // Adaptive speed (slow down for sharp turns)
         float distanceToWaypoint = direction.magnitude;
-
         rb.AddForce(transform.forward * speed, ForceMode.Acceleration);
-
-        // Add BRAKING when close to waypoint
         if (distanceToWaypoint < brakeDistance)
-        {
-            // Counteract the forward force to slow down
             rb.AddForce(-rb.velocity.normalized * speed * 0.8f, ForceMode.Acceleration);
-        }
 
-        // Progress to next waypoint
         if (distanceToWaypoint < 10f)
         {
             currentWaypoint++;
             if (currentWaypoint >= waypoints.Length)
             {
                 currentLap++;
-                if (currentLap < totalLaps)
-                {    
+                if (currentLap <= totalLaps)
+                {
+                    SplineLapManager.Instance.SetRacerLap(transform, currentLap);
                     currentWaypoint = 0;
-                    Debug.Log($"AI in Lap: {currentLap + 1}");
                 }
             }
             lastSafePosition = transform.position;
         }
 
-        // check if stuck
-        if (!isCollidingWithBarrier) 
+        // Collision recovery unchanged...
+        if (!isCollidingWithBarrier)
         {
             cooldown -= Time.fixedDeltaTime;
-            if (cooldown <= 0f) 
-            {
-                stuckTimer = 0f;
-            }
+            if (cooldown <= 0) stuckTimer = 0;
         }
-        else 
+        else
         {
-            cooldown = 1f; // Reset cooldown if touching barriers
+            cooldown = 1;
             stuckTimer += Time.fixedDeltaTime;
-            if (stuckTimer >= maxStuckTime) 
-            {
+            if (stuckTimer >= maxStuckTime)
                 ResetToLastWaypoint();
-            }
         }
+        
     }
 
     void OnDrawGizmos()
@@ -213,4 +197,5 @@ public class AIScript : MonoBehaviour
         
         Debug.Log("AI car was stuck - reset to last waypoint!");
     }
+
 }

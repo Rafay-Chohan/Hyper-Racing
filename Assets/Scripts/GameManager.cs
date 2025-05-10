@@ -2,11 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance { get; private set; }
+
+    // Progression variables
+    public int playerXP;
+    public int playerLevel;
+    public int playerCoins;
+
     // speedometer variables
     public GameObject needle;  
     private float minNeedleRotationAngle = 220f; 
@@ -15,33 +23,52 @@ public class GameManager : MonoBehaviour
     public GameObject defaultPowerupImage;
     public GameObject nitroPowerupImage; 
     public GameObject missilePowerupImage;
+    public TextMeshProUGUI PosText;
+    public TextMeshProUGUI CoinsText;
+
 
     // checkpoint variables
     public TextMeshProUGUI checkpointText;
+    public UnityAction OnRaceEnded;
 
     // race over variables
     public GameObject gameOverUI;
 
+    public int position;
+    
+
+    void Awake()
+    {
+        // Singleton setup
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+    
     void Start()
     {
-
+        // Optionally initialize UI
+        gameOverUI.SetActive(false);
     }
 
     public void UpdateNeedle(float vehicleSpeed)
     {
         desiredNeedlePosition = minNeedleRotationAngle - maxNeedleRotationAngle;
-
-        // speedometer is 0 to 180
-        float temp = vehicleSpeed / 180f; // normalizing speed between 0 and 1
-        needle.transform.localRotation = Quaternion.Euler(0, 0, (minNeedleRotationAngle - temp * desiredNeedlePosition));
+        float normalizedSpeed = Mathf.Clamp01(vehicleSpeed / 180f);
+        float angle = minNeedleRotationAngle - normalizedSpeed * desiredNeedlePosition;
+        needle.transform.localRotation = Quaternion.Euler(0, 0, angle);
     }
 
     public void UpdateCheckpointUI(int currentCheckpoint, int totalCheckpoints)
     {
         checkpointText.text = $"{currentCheckpoint}/{totalCheckpoints}";
         checkpointText.transform.localScale = Vector3.zero;
-
         checkpointText.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack);
+        // TODO: play checkpoint sound here
     }
 
     public void PauseGame()
@@ -50,6 +77,7 @@ public class GameManager : MonoBehaviour
 
         AudioListener.pause = true; // pause all audio sources in the game
     }
+
     public void ResumeGame()
     {
         Time.timeScale = 1f; 
@@ -60,18 +88,26 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         Time.timeScale = 1f;
-
-        AudioListener.pause = false;
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(
+            UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
     public void RaceOver()
     {
-        Time.timeScale = 0.2f; // everything runs at 20% speed
+        Debug.Log("COINS1" + playerCoins);
+        AwardXPAndCoins();
+        SavePlayerData();
+        LoadPlayerData();
+        Debug.Log("COINS2" + playerCoins);
+        CoinsText.text = $"{playerCoins}";
+        Time.timeScale = 0.2f;
+        OnRaceEnded?.Invoke();
+        PosText.text=$"{position} / {SplineLapManager.Instance.racers.Count}";
         StartCoroutine(ShowGameOverUIAfterDelay());
+        
     }
-    IEnumerator ShowGameOverUIAfterDelay()
+
+    private IEnumerator ShowGameOverUIAfterDelay()
     {
         yield return new WaitForSecondsRealtime(2f);
         gameOverUI.SetActive(true);
@@ -79,6 +115,7 @@ public class GameManager : MonoBehaviour
         // return to normal speed
         Time.timeScale = 1f;
     }
+
     public void UpdatePowerupUI(string powerupName)
     {
         defaultPowerupImage.SetActive(false);
@@ -99,20 +136,57 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void LoadNextLevel()
+    void LoadPlayerData()
     {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        int nextSceneIndex = currentSceneIndex + 1;
+        playerXP = PlayerPrefs.GetInt("XP", 0);
+        playerLevel = PlayerPrefs.GetInt("Level", 1);
+        playerCoins = PlayerPrefs.GetInt("Coins", 0);
+    }
 
-        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings) // check if its the last scene
+    void SavePlayerData()
+    {
+        PlayerPrefs.SetInt("XP", playerXP);
+        PlayerPrefs.SetInt("Level", playerLevel);
+        PlayerPrefs.SetInt("Coins", playerCoins);
+        PlayerPrefs.Save();
+    }
+
+    void AwardXPAndCoins()
+    {
+        int racePosition = SplineLapManager.Instance.GetRacerPosition(transform);
+        int xpEarned = 50;
+        int coinEarned = 10;
+
+        if (racePosition == 1)
         {
-            SceneManager.LoadScene(nextSceneIndex);
+            xpEarned += 20;
+            coinEarned = 100;
         }
-        else
+        else if (racePosition == 2)
         {
-            Debug.Log("No more levels!");
-            // return to main menu
-            LoadMainMenu();
+            coinEarned = 60;
+        }
+
+        playerXP += xpEarned;
+        playerCoins += coinEarned;
+
+        CheckLevelUp();
+
+        Debug.Log($"+{xpEarned} XP, +{coinEarned} Coins | XP: {playerXP}, Level: {playerLevel}, Coins: {playerCoins}");
+        
+    }
+
+    void CheckLevelUp()
+    {
+        int xpNeeded = playerLevel * 200;
+
+        while (playerXP >= xpNeeded)
+        {
+            playerXP -= xpNeeded;
+            playerLevel++;
+            playerCoins += 200; 
+            Debug.Log($"LEVEL UP! Now Level {playerLevel} (+200 coins)");
+            xpNeeded = playerLevel * 200;
         }
     }
 
@@ -128,10 +202,8 @@ public class GameManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
-        
-        // To make sure it also works in the Unity Editor
-        #if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-        #endif
+    #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+    #endif
     }
 }

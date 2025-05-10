@@ -9,19 +9,85 @@ public class LevelManager : MonoBehaviour
     public Transform buttonContainer; 
     public int totalLevels = 2; 
 
+    public TextMeshProUGUI coinsText; // 👈 Reference to the coin UI text
+
+    public int playerXP;
+    public int playerLevel;
+    public int playerCoins;
+
+    
+
     void Start()
     {
+        LoadPlayerData();
         GenerateLevelButtons();
     }
-
-    void GenerateLevelButtons()
+    void LoadPlayerData()
     {
+        playerXP = PlayerPrefs.GetInt("XP", 0);
+        playerLevel = PlayerPrefs.GetInt("Level", 1);
+        playerCoins = PlayerPrefs.GetInt("Coins", 0);
+    }
+
+    void SavePlayerData()
+    {
+        PlayerPrefs.SetInt("XP", playerXP);
+        PlayerPrefs.SetInt("Level", playerLevel);
+        PlayerPrefs.SetInt("Coins", playerCoins);
+        PlayerPrefs.Save();
+    }
+
+    void TryUnlockLevel(int levelIndex)
+    {
+        int xpNeeded = playerLevel * 200;
+        Debug.Log($"XP Needed to unlock Level {levelIndex}: {xpNeeded}");
+        Debug.Log($"XP: {playerXP}");
+
+        while (playerXP >= xpNeeded)
+        {
+            playerXP -= xpNeeded;
+            playerLevel++;
+            SavePlayerData();
+            Debug.Log($"LEVEL UP! Now Level {playerLevel}");
+            xpNeeded = playerLevel * 200;
+        }
+    }
+
+    
+     void GenerateLevelButtons()
+    {
+        foreach (Transform child in buttonContainer)
+            Destroy(child.gameObject);
+
         for (int i = 1; i <= totalLevels; i++)
         {
             GameObject button = Instantiate(buttonPrefab, buttonContainer);
-            button.GetComponentInChildren<TextMeshProUGUI>().text = $"Level {i}";
-            int levelIndex = i; 
-            button.GetComponent<Button>().onClick.AddListener(() => LoadLevel(levelIndex));
+            TextMeshProUGUI label = button.GetComponentInChildren<TextMeshProUGUI>();
+            Button btn = button.GetComponent<Button>();
+
+            Transform lockIcon = button.transform.Find("LockIcon");
+            Transform coinText = button.transform.Find("CoinText");
+
+            bool isUnlocked = (i == 1) || PlayerPrefs.GetInt($"UnlockedLevel_{i}", 0) == 1;
+
+            if (isUnlocked)
+            {
+                label.text = $"Level {i}";
+                lockIcon?.gameObject.SetActive(false);
+                coinText?.gameObject.SetActive(false);
+
+                int levelIndex = i;
+                btn.onClick.AddListener(() => LoadLevel(levelIndex));
+            }
+            else
+            {
+                label.text = $"Locked ({i})";
+                lockIcon?.gameObject.SetActive(true);
+                if (coinText != null) coinText.GetComponent<TextMeshProUGUI>().text = "100 Coins";
+
+                int levelIndex = i;
+                btn.onClick.AddListener(() => TryUnlockLevel(levelIndex));
+            }
         }
     }
 

@@ -4,11 +4,26 @@ using UnityEngine;
 
 public class CheckpointManager : MonoBehaviour
 {
+    public static CheckpointManager Instance { get; private set; }
+
     private GameObject[] checkpoints;
     public int totalCheckpoints;
     public int currentCheckpoint = 1;
-    private CheckeredFlag manager;
-    public GameManager gameManager;
+    private bool lapCompletedFully = false;
+    private bool raceStarted = false; // NEW
+
+
+    void Awake()
+    {
+        // Singleton setup
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
 
     void Start()
     {
@@ -17,52 +32,52 @@ public class CheckpointManager : MonoBehaviour
         for (int i = 0; i < transform.childCount; i++)
         {
             checkpoints[i] = transform.GetChild(i).gameObject;
-        }
 
-        manager = transform.parent.GetComponentInChildren<CheckeredFlag>();
-        if (manager == null)
-        {
-            Debug.LogError("CheckeredFlag not found in siblings!", this);
-            return;
-        }
-
-        if (gameManager == null)
-        {
-            gameManager = FindObjectOfType<GameManager>();
-            if (gameManager == null)
-            {
-                Debug.LogError("GameManager not found in scene!", this);
-                return;
-            }
+            // Assign checkpoint number to each IndivCheckpoint
+            var cp = checkpoints[i].GetComponent<IndivCheckpoint>();
+            if (cp != null)
+                cp.SetCheckpointNumber(i + 1); // 1-based index
         }
     }
 
     public void ResetCheckpoints()
     {
-        for (int i = 0; i < transform.childCount; i++)
+        for (int i = 0; i < checkpoints.Length; i++)
         {
             checkpoints[i].SetActive(i == 0);
         }
         currentCheckpoint = 1;
-        gameManager.UpdateCheckpointUI(currentCheckpoint, totalCheckpoints);
+        lapCompletedFully = true;
+        GameManager.Instance.UpdateCheckpointUI(currentCheckpoint, totalCheckpoints);
     }
 
     public void CheckpointReached(int checkpointNumber)
     {
         if (checkpointNumber != currentCheckpoint) return;
+
+        if (!raceStarted)
+        {
+            raceStarted = true;
+            Debug.Log("Race started!");
+        }
+
         checkpoints[currentCheckpoint - 1].SetActive(false);
         if (currentCheckpoint < checkpoints.Length)
         {
             checkpoints[currentCheckpoint].SetActive(true);
             currentCheckpoint++;
             Debug.Log($"Checkpoint {currentCheckpoint - 1} passed!");
-            gameManager.UpdateCheckpointUI(currentCheckpoint, totalCheckpoints);
+            GameManager.Instance.UpdateCheckpointUI(currentCheckpoint, totalCheckpoints);
         }
         else
         {
-            Debug.Log("Final checkpoint passed for lap!");
-            manager.lapCompletedFully = true;
+            Debug.Log("All checkpoints passed — lap complete");
+            lapCompletedFully = true;
         }
     }
+
+    public bool IsLapComplete() => lapCompletedFully;
+    public void ConsumeLapCompletion() => lapCompletedFully = false;
+    public bool HasRaceStarted() => raceStarted;
 
 }

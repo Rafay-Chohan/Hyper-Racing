@@ -967,11 +967,12 @@ MonoBehaviour:
   turnSpeed: 20
   gasInput: 0
   turnInput: 0
-  gameManager: {fileID: 0}
   missileSpawnPoint: {fileID: 599646890517387698}
   missilePrefab: {fileID: 2052803560239008411, guid: 55e1908836d04ec4c9baf6d201b23b41, type: 3}
   leftExhaust: {fileID: 3147806785280972261}
   rightExhaust: {fileID: 3724577413224728935}
+  positionText: {fileID: 0}
+  PosText: {fileID: 0}
 --- !u!65 &8289152098131666811
 BoxCollider:
   m_ObjectHideFlags: 0

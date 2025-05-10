@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CarMechanics : MonoBehaviour
 {
@@ -8,8 +8,8 @@ public class CarMechanics : MonoBehaviour
     public float turnSpeed = 10f;
     private Rigidbody rb;
     public float gasInput, turnInput;
-    private float currentSpeed = 0f; 
-    public GameManager gameManager;
+    private float currentSpeed = 0f;
+
 
     private string powerUpName;
     bool isPowerUpAvailable = false;
@@ -22,54 +22,90 @@ public class CarMechanics : MonoBehaviour
 
     public ParticleSystem leftExhaust;
     public ParticleSystem rightExhaust;
+    public GameObject positionText;
+    public TextMeshProUGUI PosText;
 
-    void Start() 
+
+ 
+
+
+   void Start()
     {
         rb = GetComponent<Rigidbody>();
-        if (gameManager == null)
+        SplineLapManager.Instance.RegisterRacer(transform, gameObject.name);
+        GameManager.Instance.OnRaceEnded += PositionTextDisable; // Subscribe to the event
+        
+        if (SkinManager.Instance == null || SkinManager.Instance.selectedSkin == null)
         {
-            gameManager = FindObjectOfType<GameManager>();
-            if (gameManager == null)
+            Debug.LogWarning("No skin selected.");
+            return;
+        }
+        else
+        {
+            Debug.Log("Nope");
+        }
+
+        var body = transform.Find("Body");
+        if (body != null)
+        {
+            var renderer = body.GetComponent<MeshRenderer>();
+            if (renderer != null)
             {
-                Debug.LogError("GameManager not found in scene!", this);
-                return;
+                renderer.material = SkinManager.Instance.selectedSkin.material;
+                Debug.Log("Skin applied to car: " + SkinManager.Instance.selectedSkin.SkinName);
             }
+            else
+            {
+                Debug.LogWarning("MeshRenderer not found on 'body' part.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("'body' child not found on the car.");
         }
     }
 
-    void FixedUpdate() 
+
+    void FixedUpdate()
     {
         KeyboardMove();
         OnScreenButtonMove();
-        
+
+        // Lap tracking
+
+        SplineLapManager.Instance.SetRacerLap(transform, LapManager.Instance.currentLap);
+        int myPosition = SplineLapManager.Instance.GetRacerPosition(transform);
+        GameManager.Instance.position=myPosition;
+        PosText.text = $"{myPosition} / {SplineLapManager.Instance.racers.Count}";
+
+    }
+    void PositionTextDisable()
+    {
+        positionText.SetActive(false);
     }
     void KeyboardMove()
     {
-        // Forward/backward movement
         float moveInput = Input.GetAxis("Vertical");
         rb.AddForce(transform.forward * moveInput * speed, ForceMode.Acceleration);
         currentSpeed = new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude;
+        GameManager.Instance.UpdateNeedle(currentSpeed);
 
-        // Debug.Log("Current Speed: " + currentSpeed);
-        gameManager.UpdateNeedle(currentSpeed); 
-
-        // Steering (turn only if car is moving)
-        if (currentSpeed > 0.5f) {  // Threshold to prevent tiny movements
-            float turnInput = Input.GetAxis("Horizontal");
-            transform.Rotate(Vector3.up * turnInput * turnSpeed * Time.deltaTime);
+        if (currentSpeed > 0.5f)
+        {
+            float turn = Input.GetAxis("Horizontal");
+            transform.Rotate(Vector3.up * turn * turnSpeed * Time.deltaTime);
         }
     }
+
     void OnScreenButtonMove()
     {
         rb.AddForce(transform.forward * gasInput * speed, ForceMode.Acceleration);
-        float currentSpeed = new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude;
-
-        // Steering (turn only if car is moving)
-        if (currentSpeed > 0.5f) {  // Threshold to prevent tiny movements
+        float cs = new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude;
+        if (cs > 0.5f)
             transform.Rotate(Vector3.up * turnInput * turnSpeed * Time.deltaTime);
-        }
     }
-     public void SetGasInput(float input) {
+    
+    public void SetGasInput(float input) {
         gasInput = input;
     }
 
@@ -80,7 +116,7 @@ public class CarMechanics : MonoBehaviour
         this.powerUpName = powerUpName;
         isPowerUpAvailable = true;
         Debug.Log("Power-up activated: " + powerUpName);
-        gameManager.UpdatePowerupUI(powerUpName); 
+        GameManager.Instance.UpdatePowerupUI(powerUpName); 
     }
     
     public void UsePowerUp()
@@ -103,11 +139,11 @@ public class CarMechanics : MonoBehaviour
                     break;
             }
             
-            gameManager.UpdatePowerupUI("None");
+            GameManager.Instance.UpdatePowerupUI("None");
             isPowerUpAvailable = false; // Reset power-up availability
         } else {
             Debug.Log("No power-up available to use.");
-        }
+    }
     }
      private void FireMissile() {
         if (missilePrefab == null || missileSpawnPoint == null) return;

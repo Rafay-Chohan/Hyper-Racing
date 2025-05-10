@@ -8,6 +8,9 @@ TagManager:
   - Power up
   - wall
   - AI
+  - MissilePickup
+  - Undefined
+  - NitroPickup
   layers:
   - Default
   - TransparentFX
@@ -15,7 +18,7 @@ TagManager:
   - 
   - Water
   - UI
-  - Barrier
+  - 
   - 
   - 
   - 

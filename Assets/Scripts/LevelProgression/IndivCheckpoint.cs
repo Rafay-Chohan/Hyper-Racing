@@ -9,20 +9,17 @@ public class IndivCheckpoint : MonoBehaviour
 
     void Start()
     {
-        manager = GetComponentInParent<CheckpointManager>();
+        manager = CheckpointManager.Instance;
+
         if (manager == null)
         {
             Debug.LogError("CheckpointManager not found in parent!", this);
-            return;
         }
-        if (int.TryParse(gameObject.name.Replace("Checkpoint (", "").Replace(")", ""), out checkpointNumber))
-        {
-            // Debug.Log($"Assigned checkpoint number: {checkpointNumber}");
-        }
-        else
-        {
-            Debug.LogError($"Failed to parse checkpoint number from name: {gameObject.name}", this);
-        }
+    }
+
+    public void SetCheckpointNumber(int number)
+    {
+        checkpointNumber = number;
     }
 
     void OnTriggerEnter(Collider other)
