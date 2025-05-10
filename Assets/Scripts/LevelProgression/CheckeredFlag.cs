@@ -5,29 +5,43 @@ using TMPro;
 
 public class CheckeredFlag : MonoBehaviour
 {
-   void OnTriggerEnter(Collider other)
-{
-    if (!other.CompareTag("Player")) return;
 
-    var checkpointManager = CheckpointManager.Instance;
+    int totalLaps = 0;
+    int currentLap = 1;
+    [SerializeField] private TextMeshPro flagTextBox;
 
-    if (!checkpointManager.HasRaceStarted())
+    void Start()
     {
-        Debug.Log("Race start detected. Resetting checkpoints.");
-        checkpointManager.ResetCheckpoints(); // ✅ show first checkpoint
-        return;
+       totalLaps = LapManager.Instance.GetTotalLaps();
     }
 
-    if (checkpointManager.IsLapComplete())
+    void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Lap completed fully!");
-        LapManager.Instance.LapCompleted();
-        checkpointManager.ConsumeLapCompletion();
+        if (!other.CompareTag("Player")) return;
+
+        var checkpointManager = CheckpointManager.Instance;
+
+        if (!checkpointManager.HasRaceStarted())
+        {
+            Debug.Log("Race start detected. Resetting checkpoints.");
+            flagTextBox.text = (currentLap + 1 > totalLaps) ? "FINISH" : "LAP "+(currentLap + 1).ToString();
+            currentLap++;
+            checkpointManager.ResetCheckpoints(); // ✅ show first checkpoint
+            return;
+        }
+
+        if (checkpointManager.IsLapComplete())
+        {
+            flagTextBox.text = (currentLap + 1 > totalLaps) ? "FINISH" : "LAP "+(currentLap + 1).ToString();
+            Debug.Log("Lap completed fully!");
+            LapManager.Instance.LapCompleted();
+            checkpointManager.ConsumeLapCompletion();
+            currentLap++;
+        }
+        else
+        {
+            Debug.Log("Tryna be smart huh?");
+        }
     }
-    else
-    {
-        Debug.Log("Tryna be smart huh?");
-    }
-}
 
 }

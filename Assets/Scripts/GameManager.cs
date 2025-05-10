@@ -91,6 +91,7 @@ public class GameManager : MonoBehaviour
         OnRaceEnded?.Invoke();
         PosText.text=$"{position} / {SplineLapManager.Instance.racers.Count}";
         StartCoroutine(ShowGameOverUIAfterDelay());
+        SplineLapManager.Instance. ResetRace();
         
     }
 

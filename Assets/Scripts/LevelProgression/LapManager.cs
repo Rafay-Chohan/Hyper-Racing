@@ -47,6 +47,11 @@ public class LapManager : MonoBehaviour
         LapUI.SetActive(false);
     }
 
+    public int GetTotalLaps()
+    {
+        return totalLaps;
+    }
+
     public void LapCompleted()
     {
         currentLap++;
