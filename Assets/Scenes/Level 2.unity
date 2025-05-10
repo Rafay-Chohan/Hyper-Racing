@@ -139,6 +139,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 801968542}
     - target: {fileID: 5702395645173298371, guid: 401c9acb90b6f3443a004c961ee882e3, type: 3}
+      propertyPath: gameOverUI
+      value: 
+      objectReference: {fileID: 380651465}
+    - target: {fileID: 5702395645173298371, guid: 401c9acb90b6f3443a004c961ee882e3, type: 3}
       propertyPath: checkpointText
       value: 
       objectReference: {fileID: 801968541}
@@ -3972,6 +3976,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 258199b9f3f6c304c9cd574c7d155c4a, type: 3}
+--- !u!1 &380651465 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8227179153816198656, guid: 258199b9f3f6c304c9cd574c7d155c4a, type: 3}
+  m_PrefabInstance: {fileID: 380651464}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &385461365
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21075,6 +21084,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3424413634077813713, guid: b64012c961abc3a4aa9e6d66a2cd9f16, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: d22d6db14c2167e44b5186b17821da54, type: 2}
+    - target: {fileID: 3424413634077813713, guid: b64012c961abc3a4aa9e6d66a2cd9f16, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -5273032150254867917, guid: d22d6db14c2167e44b5186b17821da54, type: 2}
+    - target: {fileID: 3424413634077813713, guid: b64012c961abc3a4aa9e6d66a2cd9f16, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3989412701611852233, guid: b64012c961abc3a4aa9e6d66a2cd9f16, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -21203,6 +21224,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LapManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6837614651340713403, guid: b64012c961abc3a4aa9e6d66a2cd9f16, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -5273032150254867917, guid: d22d6db14c2167e44b5186b17821da54, type: 2}
     - target: {fileID: 7061867123319275188, guid: b64012c961abc3a4aa9e6d66a2cd9f16, type: 3}
       propertyPath: m_LocalScale.x
       value: 25.225079
