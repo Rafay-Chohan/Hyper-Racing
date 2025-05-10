@@ -27,11 +27,16 @@ public class SplineLapManager : MonoBehaviour
         public string name;
         public Transform transform;
 
-        [HideInInspector] public int lap = 1;                   
-        [HideInInspector] public float distanceAlongSpline = 0; 
+        [HideInInspector] public float t = 0f;
+        [HideInInspector] public float lastT = 0f;
+        [HideInInspector] public float distanceAlongSpline = 0f;
+        [HideInInspector] public int lap = 1;
+        [HideInInspector] public int tlap = 1;
+
+
         public float TotalProgress(float splineLength)
         {
-            return lap * splineLength + distanceAlongSpline;
+            return tlap * splineLength + distanceAlongSpline;
         }
     }
 
@@ -86,10 +91,27 @@ public class SplineLapManager : MonoBehaviour
         foreach (var r in racers)
         {
             if (r.transform == null) continue;
-            r.distanceAlongSpline = GetSplineDistance(r.transform.position);
 
-            // Debug.Log($"[Racer Update] {r.name} - Lap: {r.lap}, Dist: {r.distanceAlongSpline:F2}, TotalProgress: {r.TotalProgress(splineLength):F2}");
+            // Get current t on spline
+            SplineUtility.GetNearestPoint(splineList, r.transform.position, out float3 _, out float currentT);
+
+            // Detect wraparound from 0.9 -> 0.1 (lap completion)
+            if (r.lastT > 0.8f && currentT < 0.2f)
+            {
+                r.tlap += 1;
+            }
+            // (Optional) detect going backwards: currentT > 0.8f && lastT < 0.2f
+
+            r.lastT = r.t;
+            r.t = currentT;
+
+            // Calculate actual distance for sorting
+            r.distanceAlongSpline = r.t * splineLength;
+            if(r.name=="Racing Car")
+                Debug.Log($"{r.name}: Lap {r.lap}, t = {r.t:F2}, Dist = {r.distanceAlongSpline:F2}, TotalProgress = {r.lap * splineLength + r.distanceAlongSpline:F2}");
+
         }
+
 
         racers.Sort((a, b) =>
             b.TotalProgress(splineLength).CompareTo(a.TotalProgress(splineLength))
@@ -101,6 +123,7 @@ public class SplineLapManager : MonoBehaviour
             var r = racers[i];
             // Debug.Log($"Pos {i + 1}: {r.name} | Lap: {r.lap} | Dist: {r.distanceAlongSpline:F2} | Total: {r.TotalProgress(splineLength):F2}");
         }
+
     }
 
 
@@ -118,10 +141,8 @@ public class SplineLapManager : MonoBehaviour
         racers.Add(new Racer { name = racerName, transform = racerTransform });
     }
 
-    public void ShowRaceResults()
+    public void ResetRace()
     {
-        // Debug.Log("=== Final Results ===");
-        // for (int i = 0; i < racers.Count; i++)
-            // Debug.Log($"Pos {i + 1}: {racers[i].name} (Lap {racers[i].lap})");
+        racers.Clear();
     }
 }
