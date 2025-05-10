@@ -30,7 +30,7 @@
 
 	Lap counter, finish line detection. Done Isbah 4/5/2025
 
-	Position Detection.
+	Position Detection. Done Eesha 10/7/2025 
 
 5.Track Design
 
@@ -39,8 +39,8 @@
 		1) Lines on roads Done Isbah 6/5/2025
 		2) Road boundary Done Isbah 6/5/2025
 		3) fix line above road bug Done Isbah 7/5/2025
-		4) Prominent Finish line
-		5) Add starting countdown
+		4) Prominent Finish line Done Isbah 10/5/2025
+		5) Add starting countdown Done Isbah 10/5/2025
 
 6.UI/UX
 
