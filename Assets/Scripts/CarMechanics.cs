@@ -25,6 +25,9 @@ public class CarMechanics : MonoBehaviour
     public GameObject positionText;
     public TextMeshProUGUI PosText;
 
+    public float knockUpForce = 5000f;
+    public float spinForce = 5000f;
+
     public GameManager gameManager;
    void Start()
     {
@@ -60,6 +63,12 @@ public class CarMechanics : MonoBehaviour
         {
             Debug.LogWarning("'body' child not found on the car.");
         }
+    }
+
+    void Update(){
+        Vector3 currentRotation = rb.rotation.eulerAngles;
+        currentRotation.z = 0;
+        rb.rotation = Quaternion.Euler(currentRotation);
     }
 
 
@@ -154,7 +163,7 @@ public class CarMechanics : MonoBehaviour
         // Add force backward (since missiles fire at opponents behind)
         Rigidbody missileRb = missile.GetComponent<Rigidbody>();
         if (missileRb != null) {
-            missileRb.AddForce(missileSpawnPoint.forward * 50f, ForceMode.Impulse);
+            missileRb.AddForce(missileSpawnPoint.forward * 60f, ForceMode.Impulse);
         }
 
         Destroy(missile, 5f); // Auto-destroy after 5 seconds
@@ -162,5 +171,12 @@ public class CarMechanics : MonoBehaviour
     private void ResetNOS() {
         speed /= nosMultiplier;
         Debug.Log("NOS effect ended.");
+    }
+    public void KnockUp()
+    {
+        Debug.Log("Car knocked up!");
+        rb.AddForce(Vector3.up * knockUpForce, ForceMode.Impulse);
+        rb.velocity = Vector3.zero;
+        rb.AddTorque(Vector3.up * spinForce, ForceMode.Impulse);
     }
 }
