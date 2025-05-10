@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -41,23 +42,28 @@ public class GameManager : MonoBehaviour
         checkpointText.transform.localScale = Vector3.zero;
 
         checkpointText.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack);
-
-        // play a sound when checkpoint reached too
     }
 
     public void PauseGame()
     {
         Time.timeScale = 0f;
+
+        AudioListener.pause = true; // pause all audio sources in the game
     }
     public void ResumeGame()
     {
         Time.timeScale = 1f; 
+
+        AudioListener.pause = false;
     }
 
     public void RestartGame()
     {
         Time.timeScale = 1f;
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+
+        AudioListener.pause = false;
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void RaceOver()
@@ -69,6 +75,9 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(2f);
         gameOverUI.SetActive(true);
+
+        // return to normal speed
+        Time.timeScale = 1f;
     }
     public void UpdatePowerupUI(string powerupName)
     {
@@ -90,10 +99,30 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void LoadNextLevel()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = currentSceneIndex + 1;
+
+        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings) // check if its the last scene
+        {
+            SceneManager.LoadScene(nextSceneIndex);
+        }
+        else
+        {
+            Debug.Log("No more levels!");
+            // return to main menu
+            LoadMainMenu();
+        }
+    }
+
     public void LoadMainMenu()
     {
         Time.timeScale = 1f;
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Main");
+
+        AudioListener.pause = false;
+
+        SceneManager.LoadScene("Main");
     }
 
     public void QuitGame()
