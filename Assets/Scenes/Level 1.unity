@@ -708,7 +708,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splineContainer: {fileID: 29468640}
-  totalLaps: 2
+  totalLaps: 1
   racers: []
 --- !u!1 &33917787 stripped
 GameObject:
