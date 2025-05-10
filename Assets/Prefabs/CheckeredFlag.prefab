@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3643971332462428476}
   - component: {fileID: 7288322698620948872}
   - component: {fileID: 3350584030492243518}
+  - component: {fileID: 5805228599502851379}
   m_Layer: 0
   m_Name: CheckeredFlag
   m_TagString: Untagged
@@ -105,3 +106,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.001652, y: 162.01537, z: 1}
   m_Center: {x: 0.00082635623, y: 80.50768, z: 0}
+--- !u!114 &5805228599502851379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4139650391746404866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d82df656ccc58418fa3b7bab81a828, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lapCompletedFully: 1
+  flagTextBox: {fileID: 0}
