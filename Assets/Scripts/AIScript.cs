@@ -32,7 +32,8 @@ public class AIScript : MonoBehaviour
     private int currentLap = 0;
     private int totalLaps;
     private LapManager lapManager;
-
+    public ParticleSystem leftExhaust;
+    public ParticleSystem rightExhaust;
 
     void Start()
     {
@@ -144,6 +145,10 @@ public class AIScript : MonoBehaviour
         Debug.Log("AI activated power-up: " + powerUpName);
         switch (powerUpName) {
                 case "Nitro":
+                    if (leftExhaust != null && !leftExhaust.isPlaying)
+                        leftExhaust.Play();
+                    if (rightExhaust != null && !rightExhaust.isPlaying)
+                        rightExhaust.Play();
                     speed *= nosMultiplier;
                     Invoke(nameof(ResetNOS), nosDuration); // Duration of NOS effect
                     break;

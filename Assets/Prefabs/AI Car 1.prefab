@@ -9848,6 +9848,8 @@ MonoBehaviour:
   barrierLayer:
     serializedVersion: 2
     m_Bits: 0
+  leftExhaust: {fileID: 2035702203281700555}
+  rightExhaust: {fileID: 2677204000862033667}
 --- !u!65 &64486269333511419
 BoxCollider:
   m_ObjectHideFlags: 0
