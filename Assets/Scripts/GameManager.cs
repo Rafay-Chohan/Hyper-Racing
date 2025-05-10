@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         // Optionally initialize UI
+        LoadPlayerData();
         gameOverUI.SetActive(false);
     }
 
@@ -170,8 +171,7 @@ public class GameManager : MonoBehaviour
         {
             playerXP -= xpNeeded;
             playerLevel++;
-            playerCoins += 200; 
-            Debug.Log($"LEVEL UP! Now Level {playerLevel} (+200 coins)");
+            Debug.Log($"LEVEL UP! Now Level {playerLevel}");
             xpNeeded = playerLevel * 200;
         }
     }
