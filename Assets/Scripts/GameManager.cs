@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
 
     // checkpoint variables
     public TextMeshProUGUI checkpointText;
+
+    public TextMeshProUGUI AlertText;
     public UnityAction OnRaceEnded;
 
     // race over variables
@@ -178,12 +180,25 @@ public class GameManager : MonoBehaviour
     {
         int xpNeeded = playerLevel * 200;
 
-        while (playerXP >= xpNeeded && playerLevel<totallevels)
+        if (playerXP >= xpNeeded && playerLevel<totallevels)
         {
             playerLevel++;
             Debug.Log($"LEVEL UP! Now Level {playerLevel}");
             xpNeeded = playerLevel * 200;
         }
+        else
+        {
+            AlertText.gameObject.SetActive(true);
+            AlertText.text = $"You need {xpNeeded-playerXP} more XP to unlock this level!";
+            Debug.Log($"You need {xpNeeded} XP to unlock this level!");
+            StartCoroutine(HideAlertAfterDelay(2f));
+        }
+    }
+
+    private IEnumerator HideAlertAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        AlertText.gameObject.SetActive(false);
     }
 
     public void NextLevel()
