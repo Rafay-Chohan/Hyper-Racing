@@ -56,7 +56,6 @@ public class GameManager : MonoBehaviour
         // Optionally initialize UI
         LoadPlayerData();
         gameOverUI.SetActive(false);
-    
         AlertText.gameObject.SetActive(false);
 
     }

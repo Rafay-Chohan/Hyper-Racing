@@ -15,10 +15,12 @@ public class PowerUpBehavior : MonoBehaviour
 
     private Vector3 startPos;
 
+    private string[] powerUps = { "Nitro", "Missile" };
+
     void Start()
     {
         startPos = transform.position;
-        
+        powerUpName = powerUps[Random.Range(0, powerUps.Length)];
         Transform canvasTransform = transform.Find("Canvas/Image");
         if (canvasTransform != null)
         {
