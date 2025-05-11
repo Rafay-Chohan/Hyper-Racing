@@ -37,13 +37,18 @@ public class GameManager : MonoBehaviour
 
     public int position;
     
-
+    void Awake()
+    {
+        // Ensure only one instance of GameManager exists
+        SplineLapManager.Instance.ResetRace();
+    }
     
     void Start()
     {
         // Optionally initialize UI
         LoadPlayerData();
         gameOverUI.SetActive(false);
+
     }
 
     public void UpdateNeedle(float vehicleSpeed)
@@ -78,6 +83,9 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         Time.timeScale = 1f;
+        
+        AudioListener.pause = false;
+        
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

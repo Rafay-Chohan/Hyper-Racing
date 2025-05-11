@@ -9,8 +9,6 @@ public class LevelManager : MonoBehaviour
     public Transform buttonContainer; 
     public int totalLevels = 2; 
 
-    public TextMeshProUGUI coinsText; 
-
     public int playerXP;
     public int playerLevel;
     public int playerCoins;
@@ -123,6 +121,7 @@ public class LevelManager : MonoBehaviour
 
     void LoadLevel(int levelIndex)
     {
+        
         Debug.Log($"Loading Level {levelIndex}");
         UnityEngine.SceneManagement.SceneManager.LoadScene($"Level {levelIndex}");
     }
