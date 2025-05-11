@@ -15,13 +15,31 @@ public class LevelManager : MonoBehaviour
     public int playerLevel;
     public int playerCoins;
 
+    public TextMeshProUGUI XPText; // 👈 Reference to the coin UI text
+
+    public Image xpFillImage;
+    public TextMeshProUGUI levelText;
+
     
 
     void Start()
     {
         LoadPlayerData();
+        UpdateXPBar();
         GenerateLevelButtons();
     }
+
+    private void UpdateXPBar()
+    {
+        int xpNeeded = playerLevel * 200;
+        float fillAmount = (float)playerXP / xpNeeded;
+        xpFillImage.fillAmount = fillAmount;
+
+   
+        levelText.text = $"Level: {playerLevel}";
+        XPText.text=$"{playerXP}/{xpNeeded}";
+    }
+
     void LoadPlayerData()
     {
         playerXP = PlayerPrefs.GetInt("XP", 0);
@@ -69,6 +87,11 @@ public class LevelManager : MonoBehaviour
             Transform coinText = button.transform.Find("CoinText");
 
             bool isUnlocked = (i == 1) || PlayerPrefs.GetInt($"UnlockedLevel_{i}", 0) == 1;
+            if (playerLevel >= i)
+            {
+                PlayerPrefs.SetInt($"UnlockedLevel_{i}", 1);
+                isUnlocked = true;
+            }
 
             if (isUnlocked)
             {
