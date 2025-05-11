@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bc4a58704c94124d8368794a8b0ba41, type: 3}
   m_Name: Grey
   m_EditorClassIdentifier: 
-  SkinName: 
-  price: 0
-  carImage: {fileID: 0}
+  SkinName: Grey
+  price: 200
+  carImage: {fileID: 1547216623646017400, guid: d1cfd0d801fae894ba258c95abb3ae52, type: 3}
   material: {fileID: 0}

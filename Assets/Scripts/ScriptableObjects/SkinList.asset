@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: SkinList
   m_EditorClassIdentifier: 
   carPurchaseList:
-  - {fileID: 11400000, guid: 45715f02a54933a4da21a6edd51a5b45, type: 2}
   - {fileID: 11400000, guid: f877a9939e776be4cb5137f25aa85598, type: 2}
+  - {fileID: 11400000, guid: 45715f02a54933a4da21a6edd51a5b45, type: 2}
+  - {fileID: 11400000, guid: 15b3892a66ca074449dbe502b10ce84b, type: 2}
   - {fileID: 11400000, guid: d5835738207b1f74ba047fdd6c20a254, type: 2}
+  - {fileID: 11400000, guid: ce34111763bb105408a210750202ac85, type: 2}

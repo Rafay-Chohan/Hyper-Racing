@@ -17,7 +17,7 @@ public class LevelManager : MonoBehaviour
 
     public TextMeshProUGUI XPText; 
 
-    public Image xpFillImage;
+    public Slider xpFillImage;
     public TextMeshProUGUI levelText;
 
     
@@ -41,7 +41,7 @@ public class LevelManager : MonoBehaviour
     {
         int xpNeeded = playerLevel * 200;
         float fillAmount = (float)playerXP / xpNeeded;
-        xpFillImage.fillAmount = fillAmount;
+        xpFillImage.value = fillAmount;
 
    
         levelText.text = $"Level: {playerLevel}";

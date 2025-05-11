@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Yellow
   m_EditorClassIdentifier: 
   SkinName: Yellow
-  price: 30
+  price: 50
   carImage: {fileID: 1547216623646017400, guid: ce36126f82a90144e832cecc45d43f3e, type: 3}
   material: {fileID: 2100000, guid: d2344366b80fe3d4f886ec412e0174fa, type: 2}
