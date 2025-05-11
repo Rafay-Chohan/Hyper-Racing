@@ -48,7 +48,14 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         // Ensure only one instance of GameManager exists
-        SplineLapManager.Instance.ResetRace();
+        if (SplineLapManager.Instance != null)
+        {
+            SplineLapManager.Instance.ResetRace();
+        }
+        else
+        {
+            Debug.LogWarning("SplineLapManager.Instance is null in GameManager.Awake()");
+        }
     }
     
     void Start()
