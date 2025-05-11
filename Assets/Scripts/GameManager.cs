@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI PosText;
     public TextMeshProUGUI CoinsText;
 
+    private int totallevels = 2; // Set this to the total number of levels in your game
+
 
     // checkpoint variables
     public TextMeshProUGUI checkpointText;
@@ -141,16 +143,16 @@ public class GameManager : MonoBehaviour
 
     void AwardXPAndCoins()
     {
-        int racePosition = SplineLapManager.Instance.GetRacerPosition(transform);
+        
         int xpEarned = 50;
         int coinEarned = 10;
 
-        if (racePosition == 1)
+        if (position == 1)
         {
             xpEarned += 20;
             coinEarned = 100;
         }
-        else if (racePosition == 2)
+        else if (position == 2)
         {
             coinEarned = 60;
         }
@@ -168,7 +170,7 @@ public class GameManager : MonoBehaviour
     {
         int xpNeeded = playerLevel * 200;
 
-        while (playerXP >= xpNeeded)
+        while (playerXP >= xpNeeded && playerLevel<totallevels)
         {
             playerXP -= xpNeeded;
             playerLevel++;
