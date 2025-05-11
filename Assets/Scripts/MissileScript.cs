@@ -15,11 +15,11 @@ public class MissileScript : MonoBehaviour
         if (aiScript != null)
         {
             Debug.Log("Missile hit AI!");
-            // aiScript.KnockUp();
+            aiScript.KnockUp();
         }
         else{
             Debug.Log("Missile hit AI!");
-            // carMechanics.KnockUp();
+            carMechanics.KnockUp();
         }
 
 
