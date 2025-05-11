@@ -222,7 +222,7 @@ public class GameManager : MonoBehaviour
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;
 
-        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings && playerXP >= xpNeeded)
+        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings && playerLevel >= currentSceneIndex)
         {
             Time.timeScale = 1f; // reset time scale in case it's slowed down
             SceneManager.LoadScene(nextSceneIndex);
