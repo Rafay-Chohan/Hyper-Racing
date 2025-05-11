@@ -164,7 +164,7 @@ public class CarMechanics : MonoBehaviour
         // Add force backward (since missiles fire at opponents behind)
         Rigidbody missileRb = missile.GetComponent<Rigidbody>();
         if (missileRb != null) {
-            missileRb.AddForce(missileSpawnPoint.forward * 80f, ForceMode.Impulse);
+            missileRb.AddForce(missileSpawnPoint.forward * 100f, ForceMode.Impulse);
         }
 
         Destroy(missile, 5f); // Auto-destroy after 5 seconds

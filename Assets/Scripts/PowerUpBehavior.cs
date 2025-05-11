@@ -18,7 +18,7 @@ public class PowerUpBehavior : MonoBehaviour
     void Start()
     {
         startPos = transform.position;
-
+        
         Transform canvasTransform = transform.Find("Canvas/Image");
         if (canvasTransform != null)
         {
