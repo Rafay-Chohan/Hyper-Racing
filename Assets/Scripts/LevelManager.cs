@@ -9,7 +9,6 @@ public class LevelManager : MonoBehaviour
     public Transform buttonContainer; 
     public int totalLevels = 2; 
 
-    public TextMeshProUGUI coinsText; 
     public int playerXP;
     public int playerLevel;
     public int playerCoins;
