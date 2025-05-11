@@ -22,12 +22,11 @@ public class MissileScript : MonoBehaviour
         else if(carMechanics != null)
         {
             Debug.Log("Missile hit AI!");
-            // carMechanics.KnockUp();
+            carMechanics.KnockUp();
+            // Destroy the missile after impact
+            Destroy(gameObject);
         }
-
-
-        // Destroy the missile after impact
-        Destroy(gameObject);
+        
     }
     
 }
