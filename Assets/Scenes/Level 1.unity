@@ -29551,6 +29551,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 599646890517387698, guid: 962069d79811c744f9ed51ec5304d4c4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 599646890517387698, guid: 962069d79811c744f9ed51ec5304d4c4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 599646890517387698, guid: 962069d79811c744f9ed51ec5304d4c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1664414876458967751, guid: 962069d79811c744f9ed51ec5304d4c4, type: 3}
       propertyPath: PosText
       value: 
@@ -29560,9 +29572,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 680483855}
     - target: {fileID: 1664414876458967751, guid: 962069d79811c744f9ed51ec5304d4c4, type: 3}
+      propertyPath: knockUpForce
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1664414876458967751, guid: 962069d79811c744f9ed51ec5304d4c4, type: 3}
       propertyPath: positionText
       value: 
       objectReference: {fileID: 33917787}
+    - target: {fileID: 1664414876458967751, guid: 962069d79811c744f9ed51ec5304d4c4, type: 3}
+      propertyPath: missilePrefab
+      value: 
+      objectReference: {fileID: 1020949332315894, guid: 4d4b1a35503bb5347a295cbc1584f8a4, type: 3}
     - target: {fileID: 4081845720149595696, guid: 962069d79811c744f9ed51ec5304d4c4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.74
