@@ -5,10 +5,11 @@ using UnityEngine;
 public class AIScript : MonoBehaviour
 {
     [Header("Waypoint Assignment")]
-    public Transform waypointsParent;
-    public float speed = 20f;
-    public float turnSpeed = 2f;
-    public float brakeDistance = 5f;
+    [SerializeField] Transform waypointsParent;
+    [SerializeField] float speed = 20f;
+    [SerializeField] float turnSpeed = 2f;
+    [SerializeField] float brakeDistance = 5f;
+    [SerializeField] float waypointDist = 10f;
 
     private Transform[] waypoints;
     private int currentWaypoint = 0;
@@ -87,7 +88,7 @@ public class AIScript : MonoBehaviour
         if (distanceToWaypoint < brakeDistance)
             rb.AddForce(-rb.velocity.normalized * speed * 0.8f, ForceMode.Acceleration);
 
-        if (distanceToWaypoint < 10f)
+        if (distanceToWaypoint < waypointDist)
         {
             currentWaypoint++;
             if (currentWaypoint >= waypoints.Length)
