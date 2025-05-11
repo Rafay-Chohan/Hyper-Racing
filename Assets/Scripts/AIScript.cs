@@ -1,9 +1,18 @@
 using System.Collections;
 using UnityEngine;
+using System.Collections.Generic;
 
 
 public class AIScript : MonoBehaviour
 {
+    [System.Serializable]
+    public struct CheckpointData
+    {
+        public Vector3 position;
+        public Quaternion rotation;
+        public int waypointIndex;
+    }
+
     [Header("Waypoint Assignment")]
     [SerializeField] Transform waypointsParent;
     [SerializeField] float speed = 20f;
@@ -29,7 +38,9 @@ public class AIScript : MonoBehaviour
     private float cooldown = 1f;
     private float stuckTimer = 0f;
     private bool isCollidingWithBarrier = false;
-    private Vector3 lastSafePosition;
+    // private Vector3 lastSafePosition;
+    private Queue<CheckpointData> checkpointHistory = new Queue<CheckpointData>();
+    private int maxCheckpointHistory = 3;
 
     // Lap count
     private int currentLap = 1;
@@ -59,7 +70,7 @@ public class AIScript : MonoBehaviour
 
         lapManager = LapManager.Instance;
         totalLaps = lapManager.totalLaps;
-        lastSafePosition = transform.position;
+        // lastSafePosition = transform.position;
 
         SplineLapManager.Instance.RegisterRacer(transform, gameObject.name);
         SplineLapManager.Instance.SetRacerLap(transform, currentLap);
@@ -109,7 +120,15 @@ public class AIScript : MonoBehaviour
                     currentWaypoint = 0;
                 }
             }
-            lastSafePosition = transform.position;
+            checkpointHistory.Enqueue(new CheckpointData()
+            {
+                position = transform.position,
+                rotation = transform.rotation,
+                waypointIndex = currentWaypoint
+            });
+
+            if (checkpointHistory.Count > maxCheckpointHistory)
+                checkpointHistory.Dequeue();
         }
 
         // Collision recovery unchanged...
@@ -206,13 +225,18 @@ public class AIScript : MonoBehaviour
 
     private void ResetToLastWaypoint()
     {
-        transform.position = lastSafePosition;
+        // transform.position = lastSafePosition;
+        int targetIndex = Mathf.Max(0, checkpointHistory.Count - 3);
+        CheckpointData safePoint = checkpointHistory.ToArray()[targetIndex];
+        transform.position = safePoint.position;
+        transform.rotation = safePoint.rotation;
+        currentWaypoint = safePoint.waypointIndex;
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        if (currentWaypoint > 0)
-            currentWaypoint--;
-        else
-            currentWaypoint = waypoints.Length - 1;
+        // if (currentWaypoint > 0)
+        //     currentWaypoint--;
+        // else
+        //     currentWaypoint = waypoints.Length - 1;
         Debug.Log($"Reset to checkpoint: {currentWaypoint}");
         stuckTimer = 0f;
         isCollidingWithBarrier = false;
