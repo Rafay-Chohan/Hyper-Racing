@@ -152,7 +152,7 @@ public class CarMechanics : MonoBehaviour
             Debug.Log("No power-up available to use.");
     }
     }
-     private void FireMissile() {
+    private void FireMissile() {
         if (missilePrefab == null || missileSpawnPoint == null) return;
 
         GameObject missile = Instantiate(
