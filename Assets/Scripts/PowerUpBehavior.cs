@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PowerUpBehavior : MonoBehaviour
 {
-    public string powerUpName = "Nitro"; // Name of the power-up
+    private string powerUpName = "Nitro"; // Name of the power-up
     public AudioSource pickupSound;
     private float floatAmplitude = 0.5f;  
     private float floatFrequency = 1f;     
@@ -72,7 +72,8 @@ public class PowerUpBehavior : MonoBehaviour
                     Debug.LogWarning("Pickup sound not assigned!", this);
                 }
                 car.ActivatePowerUp(powerUpName);
-                Destroy(gameObject); // Remove pickup
+                gameObject.SetActive(false); // Deactivate pickup
+                Invoke(nameof(Respawn), 5f);
             }
         }
         else if (other.CompareTag("AI")) {
@@ -80,8 +81,13 @@ public class PowerUpBehavior : MonoBehaviour
             AIScript car = other.GetComponent<AIScript>();
             if (car != null) {
                 car.ActivatePowerUp(powerUpName);
-                Destroy(gameObject); // Remove pickup
+                gameObject.SetActive(false); // Deactivate pickup
+                Invoke(nameof(Respawn), 5f);
             }
         }
+    }
+    private void Respawn() {
+        Start();
+        gameObject.SetActive(true); // Reactivate pickup
     }
 }
