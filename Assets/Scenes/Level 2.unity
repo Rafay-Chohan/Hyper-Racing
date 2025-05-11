@@ -22379,7 +22379,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7435772921751561592, guid: 962069d79811c744f9ed51ec5304d4c4, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7534722040835047303, guid: 962069d79811c744f9ed51ec5304d4c4, type: 3}
       propertyPath: m_Name
@@ -22387,7 +22387,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7534722040835047303, guid: 962069d79811c744f9ed51ec5304d4c4, type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: Car
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
