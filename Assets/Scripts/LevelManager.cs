@@ -9,13 +9,13 @@ public class LevelManager : MonoBehaviour
     public Transform buttonContainer; 
     public int totalLevels = 2; 
 
-    public TextMeshProUGUI coinsText; // 👈 Reference to the coin UI text
+    public TextMeshProUGUI coinsText; 
 
     public int playerXP;
     public int playerLevel;
     public int playerCoins;
 
-    public TextMeshProUGUI XPText; // 👈 Reference to the coin UI text
+    public TextMeshProUGUI XPText; 
 
     public Image xpFillImage;
     public TextMeshProUGUI levelText;
@@ -25,7 +25,15 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         LoadPlayerData();
-        UpdateXPBar();
+        if ( xpFillImage || XPText || levelText)
+        {
+            UpdateXPBar();
+        }
+        else
+        {
+            Debug.LogWarning("XP UI elements are not assigned in the inspector.");
+        }
+        // UpdateXPBar();
         GenerateLevelButtons();
     }
 
