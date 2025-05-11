@@ -2015,7 +2015,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70fb4490b8e3c57469f60fb75f3e506c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedSkin: {fileID: 0}
+  selectedSkin: {fileID: 11400000, guid: f877a9939e776be4cb5137f25aa85598, type: 2}
 --- !u!4 &1644384990
 Transform:
   m_ObjectHideFlags: 0

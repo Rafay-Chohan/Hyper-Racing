@@ -177,7 +177,6 @@ public class GameManager : MonoBehaviour
 
         while (playerXP >= xpNeeded && playerLevel<totallevels)
         {
-            playerXP -= xpNeeded;
             playerLevel++;
             Debug.Log($"LEVEL UP! Now Level {playerLevel}");
             xpNeeded = playerLevel * 200;

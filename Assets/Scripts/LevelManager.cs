@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections; 
 
 public class LevelManager : MonoBehaviour
 {
@@ -9,14 +10,16 @@ public class LevelManager : MonoBehaviour
     public Transform buttonContainer; 
     public int totalLevels = 2; 
 
-    public int playerXP;
-    public int playerLevel;
-    public int playerCoins;
+    public int playerXP=0;
+    public int playerLevel=1;
+    public int playerCoins=0;
 
     public TextMeshProUGUI XPText; 
 
     public Slider xpFillImage;
     public TextMeshProUGUI levelText;
+
+    public TextMeshProUGUI AlertText;
 
     
 
@@ -33,6 +36,7 @@ public class LevelManager : MonoBehaviour
         }
         // UpdateXPBar();
         GenerateLevelButtons();
+        AlertText.gameObject.SetActive(false);
     }
 
     private void UpdateXPBar()
@@ -67,13 +71,26 @@ public class LevelManager : MonoBehaviour
         Debug.Log($"XP Needed to unlock Level {levelIndex}: {xpNeeded}");
         Debug.Log($"XP: {playerXP}");
 
-        while (playerXP >= xpNeeded && playerLevel< totalLevels)
+        if (playerXP >= xpNeeded && playerLevel< totalLevels)
         {
             playerLevel++;
             SavePlayerData();
             Debug.Log($"LEVEL UP! Now Level {playerLevel}");
             xpNeeded = playerLevel * 200;
         }
+        else
+        {
+            AlertText.gameObject.SetActive(true);
+            AlertText.text = $"You need {xpNeeded-playerXP} more XP to unlock this level!";
+            Debug.Log($"You need {xpNeeded} XP to unlock this level!");
+            StartCoroutine(HideAlertAfterDelay(2f));
+        }
+        
+    }
+    private IEnumerator HideAlertAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        AlertText.gameObject.SetActive(false);
     }
 
     

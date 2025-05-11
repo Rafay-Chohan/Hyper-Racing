@@ -21,8 +21,10 @@ public class CarPurchase : MonoBehaviour
 
     private TextMeshProUGUI previousText;
 
+    public TextMeshProUGUI AlertText;
     void Start()
     {
+        AlertText.gameObject.SetActive(false);
         LoadPlayerData();
         LoadPurchasedCars();
         CoinsText.text = $"${playerCoins}";
@@ -78,13 +80,7 @@ public class CarPurchase : MonoBehaviour
         if (purchasedCars.Contains(skin.SkinName))
         {
             Debug.Log("Already purchased.");
-            SkinManager.Instance.selectedSkin = skin;
-            text.text = "Selected";
-            if(previousText!=text)
-            {   
-                previousText.text = "Owned";
-                previousText = text;
-            }
+            applySkin(skin,text);
             return;
         }
 
@@ -100,10 +96,32 @@ public class CarPurchase : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not enough coins!");
+            AlertText.gameObject.SetActive(true);
+            AlertText.text = $"You need {skin.price-playerCoins} more coins to purchase this car!";
+            Debug.Log($"You need {skin.price-playerCoins} more coins to purchase this car!");
+            StartCoroutine(HideAlertAfterDelay(2f));
+            return;
         }
 
         SavePlayerData();
+        applySkin(skin,text);
         CoinsText.text = $"${playerCoins}";
+    }
+
+    private IEnumerator HideAlertAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        AlertText.gameObject.SetActive(false);
+    }
+    void applySkin(carpurchaseScriptableObject skin,TextMeshProUGUI text)
+    {
+
+        SkinManager.Instance.selectedSkin = skin;
+        text.text = "Selected";
+        if(previousText!=text)
+        {   
+            previousText.text = "Owned";
+            previousText = text;
+        }
     }
 }
