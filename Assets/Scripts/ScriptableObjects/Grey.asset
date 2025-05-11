@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Grey
   m_EditorClassIdentifier: 
   SkinName: Grey
-  price: 20
+  price: 200
   carImage: {fileID: 1547216623646017400, guid: d1cfd0d801fae894ba258c95abb3ae52, type: 3}
   material: {fileID: 0}
