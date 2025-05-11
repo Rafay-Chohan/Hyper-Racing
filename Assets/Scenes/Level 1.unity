@@ -1200,7 +1200,7 @@ PrefabInstance:
       objectReference: {fileID: 1660397938}
     - target: {fileID: 4699004292283232944, guid: 41bc69a7091eb8249b0e4c235962d16d, type: 3}
       propertyPath: barrierLayer.m_Bits
-      value: 0
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 5047638089352098355, guid: 41bc69a7091eb8249b0e4c235962d16d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1402,6 +1402,10 @@ PrefabInstance:
       propertyPath: waypointsParent
       value: 
       objectReference: {fileID: 1822543662}
+    - target: {fileID: 4699004292283232944, guid: 41bc69a7091eb8249b0e4c235962d16d, type: 3}
+      propertyPath: barrierLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 5047638089352098355, guid: 41bc69a7091eb8249b0e4c235962d16d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.58
@@ -13123,7 +13127,7 @@ PrefabInstance:
       objectReference: {fileID: 1660397938}
     - target: {fileID: 4699004292283232944, guid: 41bc69a7091eb8249b0e4c235962d16d, type: 3}
       propertyPath: barrierLayer.m_Bits
-      value: 0
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 5047638089352098355, guid: 41bc69a7091eb8249b0e4c235962d16d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28937,6 +28941,10 @@ PrefabInstance:
       propertyPath: waypointsParent
       value: 
       objectReference: {fileID: 1822543662}
+    - target: {fileID: 4699004292283232944, guid: 41bc69a7091eb8249b0e4c235962d16d, type: 3}
+      propertyPath: barrierLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 5047638089352098355, guid: 41bc69a7091eb8249b0e4c235962d16d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.3

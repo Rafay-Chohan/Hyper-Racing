@@ -83,6 +83,9 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         Time.timeScale = 1f;
+        
+        AudioListener.pause = false;
+        
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
