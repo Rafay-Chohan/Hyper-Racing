@@ -10,6 +10,7 @@ public class AIScript : MonoBehaviour
     [SerializeField] float turnSpeed = 2f;
     [SerializeField] float brakeDistance = 5f;
     [SerializeField] float waypointDist = 10f;
+    float minSpeed = 2f;
 
     private Transform[] waypoints;
     private int currentWaypoint = 0;
@@ -86,7 +87,15 @@ public class AIScript : MonoBehaviour
         float distanceToWaypoint = direction.magnitude;
         rb.AddForce(transform.forward * speed, ForceMode.Acceleration);
         if (distanceToWaypoint < brakeDistance)
-            rb.AddForce(-rb.velocity.normalized * speed * 0.8f, ForceMode.Acceleration);
+        {
+            float currentSpeed = rb.velocity.magnitude;
+            // Only apply braking if above minimum speed
+            if (currentSpeed > minSpeed)
+            {
+                Vector3 brakeForce = -rb.velocity.normalized * speed * 0.8f;
+                rb.AddForce(brakeForce, ForceMode.Acceleration);
+            }
+        }
 
         if (distanceToWaypoint < waypointDist)
         {
