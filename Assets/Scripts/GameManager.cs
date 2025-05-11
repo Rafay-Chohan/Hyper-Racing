@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.Events;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -38,6 +39,11 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverUI;
 
     public int position;
+
+    public TextMeshProUGUI XPText; 
+
+    public Slider xpFillImage;
+    public TextMeshProUGUI levelText;
     
     void Awake()
     {
@@ -50,7 +56,20 @@ public class GameManager : MonoBehaviour
         // Optionally initialize UI
         LoadPlayerData();
         gameOverUI.SetActive(false);
+    
+        AlertText.gameObject.SetActive(false);
 
+    }
+
+    private void UpdateXPBar()
+    {
+        int xpNeeded = playerLevel * 200;
+        float fillAmount = (float)playerXP / xpNeeded;
+        xpFillImage.value = fillAmount;
+
+   
+        levelText.text = $"Level: {playerLevel}";
+        XPText.text=$"{playerXP}/{xpNeeded}";
     }
 
     public void UpdateNeedle(float vehicleSpeed)
@@ -103,6 +122,7 @@ public class GameManager : MonoBehaviour
         OnRaceEnded?.Invoke();
         PosText.text=$"{position} / {SplineLapManager.Instance.racers.Count}";
         StartCoroutine(ShowGameOverUIAfterDelay());
+
         SplineLapManager.Instance. ResetRace();
         
     }
@@ -111,6 +131,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(2f);
         gameOverUI.SetActive(true);
+        UpdateXPBar();
 
         // return to normal speed
         Time.timeScale = 1f;
@@ -155,7 +176,7 @@ public class GameManager : MonoBehaviour
     {
         
         int xpEarned = 50;
-        int coinEarned = 10;
+        int coinEarned = 20;
 
         if (position == 1)
         {
@@ -170,6 +191,7 @@ public class GameManager : MonoBehaviour
         playerXP += xpEarned;
         playerCoins += coinEarned;
 
+
         CheckLevelUp();
 
         Debug.Log($"+{xpEarned} XP, +{coinEarned} Coins | XP: {playerXP}, Level: {playerLevel}, Coins: {playerCoins}");
@@ -180,18 +202,11 @@ public class GameManager : MonoBehaviour
     {
         int xpNeeded = playerLevel * 200;
 
-        if (playerXP >= xpNeeded && playerLevel<totallevels)
+        while (playerXP >= xpNeeded && playerLevel<totallevels)
         {
             playerLevel++;
             Debug.Log($"LEVEL UP! Now Level {playerLevel}");
             xpNeeded = playerLevel * 200;
-        }
-        else
-        {
-            AlertText.gameObject.SetActive(true);
-            AlertText.text = $"You need {xpNeeded-playerXP} more XP to unlock this level!";
-            Debug.Log($"You need {xpNeeded} XP to unlock this level!");
-            StartCoroutine(HideAlertAfterDelay(2f));
         }
     }
 
@@ -203,13 +218,21 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel()
     {
+        int xpNeeded = playerLevel * 200;
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;
 
-        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings && playerXP >= xpNeeded)
         {
             Time.timeScale = 1f; // reset time scale in case it's slowed down
             SceneManager.LoadScene(nextSceneIndex);
+        }
+        else if(playerXP < xpNeeded)
+        {
+            AlertText.gameObject.SetActive(true);
+            AlertText.text = $"You need {xpNeeded-playerXP} more XP to unlock this level!";
+            Debug.Log($"You need {xpNeeded} XP to unlock this level!");
+            StartCoroutine(HideAlertAfterDelay(2f));
         }
         else
         {

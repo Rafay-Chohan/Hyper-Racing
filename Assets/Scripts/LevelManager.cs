@@ -37,6 +37,7 @@ public class LevelManager : MonoBehaviour
         // UpdateXPBar();
         GenerateLevelButtons();
         AlertText.gameObject.SetActive(false);
+        
     }
 
     private void UpdateXPBar()
