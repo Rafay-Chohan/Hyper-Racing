@@ -69,9 +69,8 @@ public class LevelManager : MonoBehaviour
         Debug.Log($"XP Needed to unlock Level {levelIndex}: {xpNeeded}");
         Debug.Log($"XP: {playerXP}");
 
-        while (playerXP >= xpNeeded)
+        while (playerXP >= xpNeeded && playerLevel< totalLevels)
         {
-            playerXP -= xpNeeded;
             playerLevel++;
             SavePlayerData();
             Debug.Log($"LEVEL UP! Now Level {playerLevel}");
