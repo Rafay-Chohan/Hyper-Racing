@@ -3,40 +3,50 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class CarPurchase : MonoBehaviour
 {
-    [SerializeField] private carpurchaselistScriptableObject carPurchaseList; // Reference to the ScriptableObject containing car purchase data
+    [SerializeField] private carpurchaselistScriptableObject carPurchaseList;
     public int playerCoins;
     [SerializeField] private GameObject grid;
-    [SerializeField] private GameObject purchaseButtonPrefab; // Prefab for the purchase button
+    [SerializeField] private GameObject purchaseButtonPrefab;
 
     [Header("Player Object")]
     [SerializeField] GameObject Prefab;
 
     public TextMeshProUGUI CoinsText;
 
-    private Material material; 
+    private HashSet<string> purchasedCars = new HashSet<string>();
+
+    private TextMeshProUGUI previousText;
+
     void Start()
-
     {
-        LoadPlayerData(); // Load player data at the start
-        CoinsText.text = $"${playerCoins}"; // Display initial coins
-        
-        foreach (var car in carPurchaseList.carPurchaseList) // Loop through each car in the purchase list
-        {
+        LoadPlayerData();
+        LoadPurchasedCars();
+        CoinsText.text = $"${playerCoins}";
 
+        foreach (var car in carPurchaseList.carPurchaseList)
+        {
             GameObject buttonObj = Instantiate(purchaseButtonPrefab, grid.transform);
-            // Get components from the instantiated object
             Button button = buttonObj.GetComponent<Button>();
             TextMeshProUGUI text = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
             Image image = buttonObj.GetComponentInChildren<Image>();
-            text.text = $"${car.price}"; // Set the button text to the car price
-            image.sprite = car.carImage.sprite; // Set the button image to the car image
-            button.onClick.AddListener(() => PurchaseCar(car)); // Add a listener to the button to call PurchaseCar when clicked
+
+            image.sprite = car.carImage.sprite;
+
+            bool isPurchased = purchasedCars.Contains(car.SkinName);
+            text.text = isPurchased ? "Owned" : $"${car.price}";
+            if(SkinManager.Instance.selectedSkin == car)
+            {
+                text.text = "Selected";
+                previousText = text;
+            }
+
+            button.onClick.AddListener(() => PurchaseCar(car, text));
+ 
         }
-
-
     }
 
     void LoadPlayerData()
@@ -46,26 +56,54 @@ public class CarPurchase : MonoBehaviour
 
     void SavePlayerData()
     {
-
         PlayerPrefs.SetInt("Coins", playerCoins);
         PlayerPrefs.Save();
     }
 
-    private void PurchaseCar(carpurchaseScriptableObject skin)
+    void LoadPurchasedCars()
     {
+        string data = PlayerPrefs.GetString("PurchasedCars", "");
+        purchasedCars = new HashSet<string>(data.Split(',').Where(s => !string.IsNullOrWhiteSpace(s)));
+    }
+
+    void SavePurchasedCars()
+    {
+        string data = string.Join(",", purchasedCars);
+        PlayerPrefs.SetString("PurchasedCars", data);
+        PlayerPrefs.Save();
+    }
+
+    private void PurchaseCar(carpurchaseScriptableObject skin, TextMeshProUGUI text)
+    {
+        if (purchasedCars.Contains(skin.SkinName))
+        {
+            Debug.Log("Already purchased.");
+            SkinManager.Instance.selectedSkin = skin;
+            text.text = "Selected";
+            if(previousText!=text)
+            {   
+                previousText.text = "Owned";
+                previousText = text;
+            }
+            return;
+        }
+
         if (playerCoins >= skin.price)
         {
             playerCoins -= skin.price;
+            purchasedCars.Add(skin.SkinName);
+            SavePurchasedCars();
             Debug.Log($"Purchased {skin.SkinName} for {skin.price} coins!");
+            SkinManager.Instance.selectedSkin = skin;
 
-            SkinManager.Instance.selectedSkin = skin; // Save for other scenes
-
+            text.text = "Owned";
         }
         else
         {
             Debug.Log("Not enough coins!");
         }
-        SavePlayerData(); // Save player data after purchase
-        CoinsText.text = $"${playerCoins}"; // Display initial coins
+
+        SavePlayerData();
+        CoinsText.text = $"${playerCoins}";
     }
 }
