@@ -15,4 +15,4 @@ MonoBehaviour:
   SkinName: Red
   price: 100
   carImage: {fileID: 1547216623646017400, guid: a5fce8051f6e0dc42a40d1cef2cc8294, type: 3}
-  material: {fileID: 0}
+  material: {fileID: 2100000, guid: c4c2ee3e832cffd48bb9d156c2b21376, type: 2}
