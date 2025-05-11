@@ -16,26 +16,17 @@ public class MissileScript : MonoBehaviour
         {
             Debug.Log("Missile hit AI!");
             aiScript.KnockUp();
+            // Destroy the missile after impact
+            Destroy(gameObject);
         }
-        else{
+        else if(carMechanics != null)
+        {
             Debug.Log("Missile hit AI!");
             carMechanics.KnockUp();
+            // Destroy the missile after impact
+            Destroy(gameObject);
         }
-
-
-        // Destroy the missile after impact
-        Destroy(gameObject);
+        
     }
-    /*private System.Collections.IEnumerator RecoverControl(GameObject car)
-    {
-        // Temporarily reduce control (e.g., lower traction)
-        CarController carController = car.GetComponent<CarController>();
-        if (carController != null)
-        {
-            float originalTraction = carController.traction;
-            carController.traction = originalTraction * 0.5f;
-            yield return new WaitForSeconds(driftDuration);
-            carController.traction = originalTraction;
-        }
-    }*/
+    
 }
